@@ -1,5 +1,13 @@
+import Navbar from "./layout/Navbar";
+import Header from "./layout/Header";
 const AllConversationsPage = () => {
-  return <div>This is the AllConversationsPage</div>;
+  return (
+    <div>
+      <Header />
+      <p>This is the AllConversationsPage</p>
+      <Navbar />
+    </div>
+  );
 };
 
 export default AllConversationsPage;
