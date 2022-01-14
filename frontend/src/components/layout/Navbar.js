@@ -4,7 +4,7 @@ import "../../styles/layout/Navbar.scss";
 
 const Navbar = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <ul className="navbar">
         <li>
           <Link to="/all-profiles">All Profiles</Link>
@@ -16,7 +16,7 @@ const Navbar = () => {
           <Link to="/profile">My Profile</Link>
         </li>
       </ul>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
