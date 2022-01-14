@@ -1,5 +1,18 @@
-function App() {
-  return <div>Hello World</div>;
-}
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AllConversationsPage from "./components/AllConversationsPage";
+import ProfilePage from "./components/ProfilePage";
+import AllProfilesPage from "./components/AllProfilesPage";
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<AllConversationsPage />}></Route>
+        <Route path="/all-profiles" element={<AllProfilesPage />}></Route>
+        <Route path="/profile/" element={<ProfilePage />}></Route>
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
