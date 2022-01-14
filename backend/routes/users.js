@@ -3,8 +3,14 @@ var router = express.Router();
 const pool = require("../db");
 
 /* GET users listing. */
-router.post("/", function (req, res) {
-  console.log(req.body);
+router.get("/", async (req, res) => {
+  try {
+    let response = await pool.query("SELECT * FROM users;");
+    let usersData = response.rows;
+    res.json(usersData);
+  } catch (err) {
+    console.log(err.message);
+  }
 });
 
 module.exports = router;
