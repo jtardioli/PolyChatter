@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AllConversationsPage from "./components/AllConversationsPage";
 import ProfilePage from "./components/ProfilePage";
 import AllProfilesPage from "./components/AllProfilesPage";
-import Navbar from "./components/layout/Navbar";
 
 const App = () => {
   return (
