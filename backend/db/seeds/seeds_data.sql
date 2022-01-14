@@ -7,12 +7,12 @@ INSERT INTO users (
   target_lang, 
   mother_tongue)
 VALUES (
-  "Brenda Paul",
-  "Brenda@gmail.com",
-  "Brenda123",
-  "Canada",
-  "French",
-  "English"
+  'Brenda Paul',
+  'Brenda@gmail.com',
+  'Brenda123',
+  'Canada',
+  'French',
+  'English'
 );
 
 INSERT INTO users (
@@ -23,12 +23,12 @@ INSERT INTO users (
   target_lang, 
   mother_tongue)
 VALUES (
-  "Giselle Vance",
-  "Giselle@gmail.com",
-  "Giselle123",
-  "Italy",
-  "Russian",
-  "Italian"
+  'Giselle Vance',
+  'Giselle@gmail.com',
+  'Giselle123',
+  'Italy',
+  'Russian',
+  'Italian'
 );
 
 INSERT INTO users (
@@ -39,12 +39,12 @@ INSERT INTO users (
   target_lang, 
   mother_tongue)
 VALUES (
-  "Nigel Conway",
-  "Nigel@gmail.com",
-  "Nigel123",
-  "Vietnam",
-  "German",
-  "Vietamese"
+  'Nigel Conway',
+  'Nigel@gmail.com',
+  'Nigel123',
+  'Vietnam',
+  'German',
+  'Vietamese'
 );
 -- Conversations seeds data
 INSERT INTO conversations (
