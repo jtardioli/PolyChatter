@@ -3,7 +3,7 @@ var router = express.Router();
 const pool = require("../db");
 
 /* GET users listing. */
-router.get("/", async (req, res) => {
+router.get("/api/users", async (req, res) => {
   try {
     let response = await pool.query("SELECT * FROM users;");
     let usersData = response.rows;
