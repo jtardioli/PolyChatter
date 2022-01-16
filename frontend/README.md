@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Download postman
+run postman aplication on computer
+go to the dock at the top and click open postman
+click go to workspace
+add a new page by clicking the plus next to overview
+make sur you are using a get request
+use this url localhost:5000/api/users
+click send
+you should see the user data returned
+if you do not see the user data you probably have a problem with your .env file :'(
+c
