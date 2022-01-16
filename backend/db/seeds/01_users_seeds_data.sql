@@ -12,7 +12,7 @@ VALUES (
   'Brenda@gmail.com',
   'Brenda123',
   1,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 
 INSERT INTO users (
@@ -28,7 +28,7 @@ VALUES (
   'Giselle@gmail.com',
   'Giselle123',
   2,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 
 INSERT INTO users (
@@ -44,7 +44,7 @@ VALUES (
   'Nigel@gmail.com',
   'Nigel123',
   3,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 
 INSERT INTO users (
@@ -60,7 +60,7 @@ VALUES (
   'Keely@gmail.com',
   'Keely123',
   4,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 
 INSERT INTO users (
@@ -76,7 +76,7 @@ VALUES (
   'Leon@gmail.com',
   'Leon123',
   5,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 INSERT INTO users (
   username,
@@ -91,7 +91,7 @@ VALUES (
   'Jaiden@gmail.com',
   'Jaiden123',
   6,
-  ''
+  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
 );
 -- Conversations seeds data
 INSERT INTO conversations (
@@ -102,89 +102,4 @@ VALUES (
   2
 );
 
--- Countries seeds data
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇨🇦',
-  'Canada',
-  'CA'
-);
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇮🇹',
-  'Italy',
-  'IT'
-);
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇻🇳',
-  'Vietnam',
-  'VN'
-);
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇷🇺',
-  'Russia',
-  'RU'
-);
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇴🇲',
-  'Oman',
-  'OM'
-);
-INSERT INTO countries (
-  emoji,
-  countryName, 
-  countryShortName)
-VALUES (
-  '🇰🇿',
-  'Kazakhstan',
-  'KZ'
-);
-
--- Languages seeds data
-INSERT INTO Languages (
-  shortForm,
-  longForm)
-VALUES (
-  'En',
-  'English'
-);
-INSERT INTO Languages (
-  shortForm,
-  longForm)
-VALUES (
-  'Vi',
-  'Vietnamese'
-);
-INSERT INTO Languages (
-  shortForm,
-  longForm)
-VALUES (
-  'Ru',
-  'Russian'
-);
-INSERT INTO Languages (
-  shortForm,
-  longForm)
-VALUES (
-  'Ru',
-  'Arabic'
-);
 
