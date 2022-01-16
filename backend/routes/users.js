@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   try {
     let response = await pool.query("SELECT * FROM users;");
     let usersData = response.rows;
-    res.json(usersData);
+    res.send(usersData);
   } catch (err) {
     console.log(err.message);
   }
