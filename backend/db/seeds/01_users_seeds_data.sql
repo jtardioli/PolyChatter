@@ -8,11 +8,11 @@ INSERT INTO users (
   bio)
 VALUES (
   'bpaul',
-  'Brenda Paul'
+  'Brenda Paul',
   'Brenda@gmail.com',
   'Brenda123',
   1,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
+  'Passionate polyglot, speaking 5 languages.'
 );
 
 INSERT INTO users (
@@ -28,7 +28,7 @@ VALUES (
   'Giselle@gmail.com',
   'Giselle123',
   2,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
+  'Passionate polyglot, speaking 5 languages.'
 );
 
 INSERT INTO users (
@@ -44,7 +44,7 @@ VALUES (
   'Nigel@gmail.com',
   'Nigel123',
   3,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
+  'Passionate polyglot, speaking 5 languages.'
 );
 
 INSERT INTO users (
@@ -60,7 +60,7 @@ VALUES (
   'Keely@gmail.com',
   'Keely123',
   4,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
+  'Passionate polyglot, speaking 5 languages.'
 );
 
 INSERT INTO users (
@@ -76,7 +76,7 @@ VALUES (
   'Leon@gmail.com',
   'Leon123',
   5,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
+  'Passionate polyglot, speaking 5 languages.'
 );
 INSERT INTO users (
   username,
@@ -91,15 +91,7 @@ VALUES (
   'Jaiden@gmail.com',
   'Jaiden123',
   6,
-  'Passionate polyglot, speaking 5 languages. Let\'s talk!'
-);
--- Conversations seeds data
-INSERT INTO conversations (
-  userA_id, 
-  userB_id)
-VALUES (
-  1,
-  2
+  'Passionate polyglot, speaking 5 languages.'
 );
 
 

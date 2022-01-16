@@ -1,4 +1,4 @@
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -9,7 +9,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -21,7 +21,7 @@ VALUES (
   false
 );
 
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -32,7 +32,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -44,7 +44,7 @@ VALUES (
   false
 );
 
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -55,7 +55,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -67,7 +67,7 @@ VALUES (
   false
 );
 
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -78,7 +78,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -90,7 +90,7 @@ VALUES (
   false
 );
 
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -101,7 +101,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -113,7 +113,7 @@ VALUES (
   false
 );
 
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,
@@ -124,7 +124,7 @@ VALUES (
   6,
   true
 );
-INSERT INTO Languages (
+INSERT INTO userLanguages (
   user_id,
   language_id,
   user_level,

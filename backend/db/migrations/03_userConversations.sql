@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS userConverations CASCADE;
+DROP TABLE IF EXISTS conversations CASCADE;
 
 
 CREATE TABLE conversations (
