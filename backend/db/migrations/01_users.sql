@@ -7,6 +7,6 @@ CREATE TABLE users (
   image TEXT,
   email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
-  countryId INTEGER NOT NULL,
+  country_id INTEGER NOT NULL,
   bio TEXT
 );
