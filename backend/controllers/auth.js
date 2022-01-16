@@ -55,3 +55,16 @@ exports.protected = async (req, res) => {
     });
   }
 };
+
+exports.logout = async (req, res) => {
+  try {
+    return res.status(200).clearCookie("token", { httpOnly: true }).json({
+      success: true,
+      message: "Logged out successfully!",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
