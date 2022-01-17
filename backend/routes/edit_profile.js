@@ -1,21 +1,40 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const pool = require("../db");
 const { userAuth } = require("../middlewares/auth-middleware");
-var cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary')
+const { hash } = require("bcryptjs");
+//const { cloudinaryConfig, uploader } = require('../config/cloudinaryConfig')
 
-//Cloudinary config
 
 // Get Users Information for Profile Page
+//userAuth
 router.post("/profile/edit", userAuth, async (req, res) => {
-  console.log(req.body)
-  try {
-    cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-  { public_id: "olympic_flag" }, 
-  function(error, result) {console.log(result); });
-    // let response = await pool.query("INSERT INTO users (username, name, image, password, bio) VALUES ($1, $2, $3, $4, $5, $6) WHERE id = $7;", [req.user.username, req.user.name, req.user.image, req.user.password, req.user.bio, req.user.id]);
-    // let usersData = response.rows;
-    // res.send(usersData);
+  // console.log(req.body)
+   console.log(req.files)
+  // console.log(req.user)
+
+ try {
+  let imageURL = "";
+  if ("files" in req) {
+    await cloudinary.v2.uploader.upload(req.files.file.tempFilePath,
+    { public_id: req.files.file.name }, 
+    function(error, result) {
+      if(error){
+        console.log(error)
+      }
+      imageURL = result; 
+    });
+    let response = await pool.query("UPDATE users SET image = $1 WHERE id = $2 RETURNING image;", [imageURL, req.user.id]);
+    let usersData = response.rows;
+    console.log(usersData)
+    res.json(usersData);
+  }
+  
+    let response = await pool.query("UPDATE users SET username = $1, name = $2, bio = $3 WHERE id = $4 RETURNING username, name, bio;", [req.body.username, req.body.name, req.body.bio, req.user.id]);
+    let usersData = response.rows;
+    console.log(usersData)
+    res.json(usersData);
   } catch (err) {
     console.log(err.message);
   }
