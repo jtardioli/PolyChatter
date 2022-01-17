@@ -5,10 +5,11 @@ require("dotenv").config();
 
 exports.register = async (req, res) => {
   const { username, name, email, password } = req.body;
+  console.log(req.body)
   try {
     const hashedPassword = await hash(password, 10);
     await pool.query(
-      `INSERT INTO users (username, name, email, password)
+      `INSERT INTO users (username, name, email, password, country_id)
     VALUES ($1, $2, $3, $4);`,
       [username, name, email, hashedPassword]
     );

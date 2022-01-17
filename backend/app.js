@@ -6,11 +6,15 @@ const cors = require("cors");
 const passport = require("passport");
 require("./middlewares/passport-middleware");
 require("dotenv").config();
+var cloudinary = require('cloudinary').v2
+
+//loudinary config
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const profileRouter = require("./routes/profile")
 const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile")
+const editProfileRouter = require("./routes/edit_profile")
 
 const app = express();
 
@@ -23,8 +27,9 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/api/profile", profileRouter)
+app.use("/api", profileRouter)
 app.use("/", usersRouter);
 app.use("/api", authRouter);
+app.use("/api", editProfileRouter);
 
 module.exports = app;
