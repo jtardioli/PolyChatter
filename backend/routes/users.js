@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const pool = require("../db");
 
-/* GET users listing. */
+/* GET all users info */
 router.get("/users", async (req, res) => {
   try {
     // query for all userLanguage enteries
@@ -15,7 +15,7 @@ router.get("/users", async (req, res) => {
     JOIN languages ON  languages.id = userLanguages.language_id 
     ;
     `);
-    // quert for all users with their countries
+    // query for all users with their countries
     let usersData = await pool.query(`
     SELECT users.id,
     users.username,
