@@ -4,6 +4,7 @@ const { sign } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
+  console.log(req.body);
   const { username, name, email, password } = req.body;
   console.log(req.body)
   try {

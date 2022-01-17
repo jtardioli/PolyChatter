@@ -1,18 +1,15 @@
 import { useState } from "react";
 const axios = require("axios").default;
 
-const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const registerUser = () => {
-    console.log(name, username, email, password);
-    const newUser = { name, username, email, password };
+  const loginUser = () => {
+    const newUser = { email, password };
     const req = newUser;
     axios
-      .post("http://localhost:5000/api/register", req)
+      .post("http://localhost:5000/api/login", req, { withCredentials: true })
       .then(function (response) {
         console.log(response);
       })
@@ -23,26 +20,8 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Login</h1>
       <form>
-        <label>
-          Name
-          <input
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            name="name"
-          />
-        </label>
-
-        <label>
-          Username:
-          <input
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            name="username"
-          />
-        </label>
-
         <label>
           Email:
           <input
@@ -61,9 +40,9 @@ const RegisterPage = () => {
           />
         </label>
       </form>
-      <button onClick={registerUser}>Register</button>
+      <button onClick={loginUser}>Login</button>
     </div>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
