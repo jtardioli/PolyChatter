@@ -4,6 +4,7 @@ const { sign } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
+  console.log(req.body);
   const { username, name, email, password } = req.body;
   try {
     const hashedPassword = await hash(password, 10);
