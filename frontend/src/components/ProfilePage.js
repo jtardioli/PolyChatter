@@ -1,5 +1,7 @@
 import Navbar from "./layout/Navbar";
 import Header from "./layout/Header";
+import { useEffect } from "react";
+
 const ProfilePage = () => {
   return (
     <div>
