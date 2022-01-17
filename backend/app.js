@@ -40,8 +40,12 @@ app.use(
 )
 
 app.use("/", indexRouter);
+<<<<<<< HEAD
 app.use("/api", profileRouter)
 app.use("/", usersRouter);
+=======
+app.use("/api", usersRouter);
+>>>>>>> master
 app.use("/api", authRouter);
 app.use("/api", editProfileRouter);
 

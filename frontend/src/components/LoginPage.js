@@ -4,6 +4,10 @@ const axios = require("axios").default;
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const token = localStorage.getItem("token");
+  if (token) {
+    window.history.pushState({}, undefined, "/");
+  }
 
   const loginUser = () => {
     const newUser = { email, password };
@@ -11,7 +15,13 @@ const LoginPage = () => {
     axios
       .post("http://localhost:5000/api/login", req, { withCredentials: true })
       .then(function (response) {
-        console.log(response);
+        // const user = { token: response };
+        localStorage.setItem("token", response.data.token);
+
+        console.log("login resp ++++", response);
+        if (token) {
+          window.history.pushState({}, undefined, "/");
+        }
       })
       .catch(function (error) {
         console.log(error);

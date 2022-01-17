@@ -1,6 +1,6 @@
 const { hash } = require("bcryptjs");
 const pool = require("../db");
-const { sign } = require("jsonwebtoken");
+const { sign, verify } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
@@ -37,6 +37,8 @@ exports.login = async (req, res) => {
     const token = await sign(payload, process.env.SECRET);
     return res.status(200).cookie("token", token, { httpOnly: true }).json({
       success: true,
+      id: user.id,
+      token,
       message: "Logged in successfully",
     });
   } catch (err) {
@@ -50,6 +52,18 @@ exports.protected = async (req, res) => {
   try {
     res.status(200).json({
       info: "protected info",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message,
+    });
+  }
+};
+
+exports.user = async (req, res) => {
+  try {
+    res.status(200).json({
+      user: req.user,
     });
   } catch (err) {
     return res.status(500).json({

@@ -10,11 +10,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AllConversationsPage />}></Route>
+        <Route path="/" element={<AllProfilesPage />}></Route>
+        <Route path="/conversations" element={<AllConversationsPage />}></Route>
+        <Route path="/profile/" element={<ProfilePage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/all-profiles" element={<AllProfilesPage />}></Route>
-        <Route path="/profile/" element={<ProfilePage />}></Route>
         <Route path="/profile/edit" element={<EditProfilePage />}></Route>
       </Routes>
     </Router>
