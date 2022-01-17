@@ -19,7 +19,7 @@ const EditProfilePage = () => {
   const submit = () => {
     const data = new FormData() 
     data.append('file', image)
-    let url = "http://localhost:3000/profile/edit";
+    let url = "http://localhost:5000/api/profile/edit";
 
     axios.post(url, data, { // receive two parameter endpoint url ,form data 
     })
@@ -64,15 +64,6 @@ const EditProfilePage = () => {
             onChange={handleInputChange}
             type="file"
             name="image"
-          />
-        </label>
-
-        <label>
-          Self-introduction
-          <input
-            onChange={(e) => setBio(e.target.value)}
-            type="text"
-            name="bio"
           />
         </label>
 
