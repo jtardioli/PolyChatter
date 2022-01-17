@@ -6,7 +6,7 @@ const { userAuth } = require("../middlewares/auth-middleware");
 // Get Users Information for Profile Page
 router.get("/profile", userAuth, async (req, res) => {
   try {
-    let response = await pool.query("SELECT name, username, image, bio FROM users WHERE id = $1;", [req.user.id]);
+    let response = await pool.query("SELECT users.name, users.username, users.image, users.bio FROM users WHERE id = $1;", [req.user.id]);
     let userData = response.rows;
     res.send(userData);
   } catch (err) {

@@ -3,12 +3,19 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const passport = require("passport");
 require("./middlewares/passport-middleware");
 require("dotenv").config();
-var cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2
+//const { cloudinaryConfig, uploader } = require('./config/cloudinaryConfig')
 
-//loudinary config
+//Cloudinary config
+cloudinary.config({ 
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET  
+});
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -25,6 +32,12 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+  })
+)
 
 app.use("/", indexRouter);
 app.use("/api", profileRouter)
