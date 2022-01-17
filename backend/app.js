@@ -22,7 +22,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/", usersRouter);
+app.use("/api", usersRouter);
 app.use("/api", authRouter);
 
 module.exports = app;
