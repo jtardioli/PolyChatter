@@ -6,7 +6,7 @@ const axios = require("axios").default;
 
 const AllProfilesPage = () => {
   const [users, setUsers] = useState(null);
-
+  // Grab users from DB
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/users")
@@ -17,9 +17,6 @@ const AllProfilesPage = () => {
       .catch(function (error) {
         // handle error
         console.log(error);
-      })
-      .then(function () {
-        // always executed
       });
   }, []);
   console.log(users);
