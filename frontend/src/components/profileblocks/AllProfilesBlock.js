@@ -5,6 +5,7 @@ const AllProfilesBlock = (props) => {
   const { id, username, name, image, emoji, nativeLanguage, targetLanguage } =
     props.user;
   let navigate = useNavigate();
+
   return (
     <div
       onClick={() => {
