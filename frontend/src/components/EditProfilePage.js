@@ -8,22 +8,36 @@ import "../styles/layout/EditProfilePage.scss";
 
 const EditProfilePage = () => {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
 
-  // const editProfile =() => {
-  //   console.log(name, bio, country, image)
-  // }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.history.pushState({}, undefined, "/login");
+  }
+  console.log("token -----", token);
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+
 
   const submit = () => {
     const data = new FormData() 
-    data.append('file', image)
+    console.log(data)
+    console.log(config)
+    data.append('file', image);
+    data.append('name', name);
+    data.append('username', username);
+    data.append('bio', bio);
+    data.append('country', country);
     let url = "http://localhost:5000/api/profile/edit";
-
-    axios.post(url, data, { // receive two parameter endpoint url ,form data 
-    })
-    .then(res => { // then print response status
+    
+    // receive two parameter endpoint url ,form data
+    axios.post(url, data, config).then(res => { // then print response status
         console.warn(res);
     })
 
@@ -37,7 +51,7 @@ const EditProfilePage = () => {
   return (
     <div>
       <Header />
-      <p>This is the ProfilePage</p>
+      <p>This is the EditProfilePage</p>
       <Navbar />
       <form className="vertical">
       <label>
@@ -46,6 +60,15 @@ const EditProfilePage = () => {
             onChange={(e) => setName(e.target.value)}
             type="text"
             name="name"
+          />
+        </label>
+
+        <label>
+          Username
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            name="username"
           />
         </label>
 

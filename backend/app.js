@@ -8,7 +8,6 @@ const passport = require("passport");
 require("./middlewares/passport-middleware");
 require("dotenv").config();
 const cloudinary = require('cloudinary').v2
-//const { cloudinaryConfig, uploader } = require('./config/cloudinaryConfig')
 
 //Cloudinary config
 cloudinary.config({ 
@@ -40,12 +39,8 @@ app.use(
 )
 
 app.use("/", indexRouter);
-<<<<<<< HEAD
 app.use("/api", profileRouter)
 app.use("/", usersRouter);
-=======
-app.use("/api", usersRouter);
->>>>>>> master
 app.use("/api", authRouter);
 app.use("/api", editProfileRouter);
 
