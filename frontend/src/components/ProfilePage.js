@@ -9,7 +9,7 @@ const ProfilePage = () => {
   if (!token) {
     window.history.pushState({}, undefined, "/login");
   }
-  console.log("token -----", token);
+
   let config = {
     headers: {
       Authorization: "Bearer " + token,

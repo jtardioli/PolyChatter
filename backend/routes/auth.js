@@ -5,7 +5,7 @@ const {
   login,
   protected,
   logout,
-  user,
+  currentUser,
 } = require("../controllers/auth");
 const { registerValidation, loginValidation } = require("../validators/auth");
 const {
@@ -16,7 +16,7 @@ const {
 } = require("../middlewares/auth-middleware");
 
 // router.get("/protected", userAuth, protected);
-router.get("/user", validateJWTTokenMiddleware, user);
+router.get("/current-user", validateJWTTokenMiddleware, currentUser);
 router.post("/register", registerValidation, validationMiddleware, register);
 router.post("/login", loginValidation, validationMiddleware, login);
 router.get("/logout", validateJWTTokenMiddleware, logout);

@@ -16,6 +16,7 @@ router.get("/users", async (req, res) => {
     JOIN languages ON  languages.id = userLanguages.language_id 
     ;
     `);
+
     // query for all users with their countries
     let usersData = await pool.query(`
     SELECT users.id,
@@ -28,25 +29,32 @@ router.get("/users", async (req, res) => {
     countries.countryshortname,
     countries.emoji
     FROM users
-    JOIN countries on countries.id = users.country_id
+    LEFT JOIN countries on countries.id = users.country_id
+    
     ;
     `);
 
     // Extract data from the gross big request object
     usersLangData = usersLangData.rows;
     usersData = usersData.rows;
+
     let users = {};
 
     // transform usersData array into an object to be able to grab users by their ID
-    for (userData of usersData) {
+    for (const userData of usersData) {
       users[userData.id] = userData;
     }
+    console.log(users);
 
     // loop through the userlang enteries using the userID to insert language data into the user object directly
-    for (userLangData of usersLangData) {
-      const userID = userLangData.userid;
+    for (const userLangData of usersLangData) {
+      const userID = String(userLangData.userid);
+      // console.log(userLangData.nativelanguage);
       if (userLangData.nativelanguage) {
+        // console.log("USER LANG ID: ", userID);
+
         users[userID].nativeLanguage = userLangData;
+        // console.log(users["11"]);
       } else {
         users[userID].targetLanguage = userLangData;
       }
@@ -58,7 +66,7 @@ router.get("/users", async (req, res) => {
     // Send users array to front end
     res.send(users);
   } catch (err) {
-    console.log(err.message);
+    console.log("THIS IS THE ERROR _++_+_", err.message);
   }
 });
 
@@ -94,7 +102,7 @@ router.get("/user/:id", async (req, res) => {
     countries.countryshortname,
     countries.emoji
     FROM users
-    JOIN countries on countries.id = users.country_id
+    LEFT JOIN countries on countries.id = users.country_id
     WHERE users.id = $1
     ;`,
       [userID]

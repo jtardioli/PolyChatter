@@ -6,7 +6,7 @@ require("dotenv").config();
 exports.register = async (req, res) => {
   console.log(req.body);
   const { username, name, email, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   try {
     const hashedPassword = await hash(password, 10);
     await pool.query(
@@ -60,7 +60,7 @@ exports.protected = async (req, res) => {
   }
 };
 
-exports.user = async (req, res) => {
+exports.currentUser = async (req, res) => {
   try {
     res.status(200).json({
       user: req.user,

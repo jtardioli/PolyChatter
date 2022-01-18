@@ -19,7 +19,7 @@ const AllProfilesPage = () => {
         console.log(error);
       });
   }, []);
-  console.log(users);
+  console.log("These are the users", users);
   let allProfiles;
   if (users) {
     allProfiles = users.map((user) => {
