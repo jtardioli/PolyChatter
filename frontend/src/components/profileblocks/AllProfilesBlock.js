@@ -17,7 +17,7 @@ const AllProfilesBlock = (props) => {
         <p>{username}</p>
         <p>{emoji}</p>
         <p>
-          {nativeLanguage.shortform} => {targetLanguage.shortform}
+          {nativeLanguage.shortform} {" => "} {targetLanguage.shortform}
         </p>
       </div>
     </div>
