@@ -43,10 +43,11 @@ router.get("/users", async (req, res) => {
 
     // loop through the userlang enteries using the userID to insert language data into the user object directly
     for (userLangData of usersLangData) {
+      const userID = userLangData.userid;
       if (userLangData.nativelanguage) {
-        users[userLangData.userid].nativeLanguage = userLangData;
+        users[userID].nativeLanguage = userLangData;
       } else {
-        users[userLangData.userid].targetLanguage = userLangData;
+        users[userID].targetLanguage = userLangData;
       }
     }
 
