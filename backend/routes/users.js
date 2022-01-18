@@ -9,6 +9,7 @@ router.get("/users", async (req, res) => {
     let usersLangData = await pool.query(`
     SELECT userLanguages.user_id as userID,
     userLanguages.nativeLanguage,
+    userLanguages.user_level as level,
      languages.shortform,
      languages.longform 
      FROM userLanguages
@@ -66,10 +67,11 @@ router.get("/user/:id", async (req, res) => {
 
   try {
     // query for specific userLanguage enteries
-    let userLangData = await pool.query(
+    let userLangsData = await pool.query(
       `
     SELECT userLanguages.user_id as userID,
     userLanguages.nativeLanguage,
+    userLanguages.user_level as level,
      languages.shortform,
      languages.longform
      FROM userLanguages
@@ -80,7 +82,8 @@ router.get("/user/:id", async (req, res) => {
       [userID]
     );
     // query for all users with their countries
-    let usersData = await pool.query(`
+    let userData = await pool.query(
+      `
     SELECT users.id,
     users.username,
     users.name,
@@ -92,30 +95,25 @@ router.get("/user/:id", async (req, res) => {
     countries.emoji
     FROM users
     JOIN countries on countries.id = users.country_id
-    
-    ;
-    // `);
-    // // Extract data from the gross big request object
-    // usersLangData = usersLangData.rows;
-    // usersData = usersData.rows;
-    // let users = {};
-    // // transform usersData array into an object to be able to grab users by their ID
-    // for (userData of usersData) {
-    //   users[userData.id] = userData;
-    // }
-    // // loop through the userlang enteries using the userID to insert language data into the user object directly
-    // for (userLangData of usersLangData) {
-    //   const userID = userLangData.userid;
-    //   if (userLangData.nativelanguage) {
-    //     users[userID].nativeLanguage = userLangData;
-    //   } else {
-    //     users[userID].targetLanguage = userLangData;
-    //   }
-    // }
-    //   // transform the object back into an array of objects so its easier to work with in react
-    //   users = Object.keys(users).map((k) => users[k]);
-    //   // Send users array to front end
-    //   res.send(users);
+    WHERE users.id = $1
+    ;`,
+      [userID]
+    );
+    // Extract data from the gross big request object
+    userLangsData = userLangsData.rows;
+    userData = userData.rows;
+    const user = userData[0];
+
+    // loop through the userlang enteries at add language info to user
+    for (userLangData of userLangsData) {
+      if (userLangData.nativelanguage) {
+        user.nativeLanguage = userLangData;
+      } else {
+        user.targetLanguage = userLangData;
+      }
+    }
+
+    res.send(user);
   } catch (err) {
     console.log(err.message);
   }
