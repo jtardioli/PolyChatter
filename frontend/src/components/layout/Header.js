@@ -1,7 +1,7 @@
 import "../../styles/layout/Header.scss";
 
-function Header() {
-  return <div className="header">Header</div>;
+function Header(props) {
+  return <div className="header">Header {props.isMyProfile && "settings"}</div>;
 }
 
 export default Header;

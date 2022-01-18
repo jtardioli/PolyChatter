@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AllProfilesBlock from "./profileblocks/AllProfilesBlock";
 const axios = require("axios").default;
 
-const AllProfilesPage = () => {
+const AllProfilesPage = (props) => {
   const [users, setUsers] = useState(null);
   // Grab users from DB
   useEffect(() => {
@@ -19,7 +19,7 @@ const AllProfilesPage = () => {
         console.log(error);
       });
   }, []);
-  console.log("These are the users", users);
+
   let allProfiles;
   if (users) {
     allProfiles = users.map((user) => {
@@ -32,7 +32,7 @@ const AllProfilesPage = () => {
       <Header />
       <div className="scroll">{users && allProfiles}</div>
 
-      <Navbar />
+      <Navbar currentUser={props.currentUser} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const AllProfilesBlock = (props) => {
   return (
     <div
       onClick={() => {
-        navigate(`/partner-profile/${id}`);
+        navigate(`/profile/${id}`);
       }}
       className="block"
     >
