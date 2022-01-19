@@ -18,15 +18,9 @@ const EditProfilePage = () => {
     nativeLanguage:"",
     targetLanguage:""
   });
-
   console.log(user)
-  // const [name, setName] = useState("");
-  // const [username, setUsername] = useState("");
-  // const [bio, setBio] = useState("");
-  // const [country, setCountry] = useState("");
+
   const [image, setImage] = useState("");
-  // const [nativeLanguage, setNativeLanguage] = useState("");
-  // const [targetLanguage, setTargetLanguage] = useState("");
   
   const token = localStorage.getItem("token");
   if (!token) {
@@ -44,6 +38,7 @@ const EditProfilePage = () => {
   .get(`http://localhost:5000/api/profile/edit`, config)
   .then(function (response) {
     // handle success
+    console.log(response)
     setUser(response.data.userData[0])
   })
   .catch(function (error) {
@@ -51,8 +46,6 @@ const EditProfilePage = () => {
     console.log(error);
   });
 }, []);
-
- 
 
 
   const submit = () => {
@@ -92,8 +85,8 @@ const EditProfilePage = () => {
       <Header />
       <p>This is the EditProfilePage</p>
       <Navbar />
-      <img src={user.image}  width="200" height="200" />
       <form className="vertical">
+      <img src={user.image}  width="200" height="200" />
       <label>
           Name
           <input
