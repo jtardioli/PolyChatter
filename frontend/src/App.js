@@ -6,12 +6,14 @@ import AllConversationsPage from "./components/AllConversationsPage";
 import ProfilePage from "./components/ProfilePage";
 import AllProfilesPage from "./components/AllProfilesPage";
 import EditProfilePage from "./components/EditProfilePage";
+import Cookies from "js-cookie";
+
 const axios = require("axios").default;
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
-  const token = localStorage.getItem("token");
-
+  // const token = localStorage.getItem("token");
+  const token = Cookies.get("token"); // => 'value'
   if (!token) {
     // window.history.pushState({}, undefined, "/login");
   }

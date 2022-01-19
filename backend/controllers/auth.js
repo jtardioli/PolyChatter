@@ -6,14 +6,16 @@ require("dotenv").config();
 exports.register = async (req, res) => {
   console.log(req.body);
   const { username, name, email, password } = req.body;
-  console.log(req.body);
+
   try {
     const hashedPassword = await hash(password, 10);
+
     await pool.query(
-      `INSERT INTO users (username, name, email, password, country_id)
+      `INSERT INTO users (username, name, email, password)
     VALUES ($1, $2, $3, $4);`,
       [username, name, email, hashedPassword]
     );
+    console.log("hello");
     res.status(201).json({
       success: true,
       message: "Registration Successful",
@@ -35,7 +37,7 @@ exports.login = async (req, res) => {
 
   try {
     const token = await sign(payload, process.env.SECRET);
-    return res.status(200).cookie("token", token, { httpOnly: true }).json({
+    return res.status(200).cookie("token", token, { httpOnly: false }).json({
       success: true,
       id: user.id,
       token,
