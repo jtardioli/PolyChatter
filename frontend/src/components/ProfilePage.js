@@ -8,7 +8,6 @@ const axios = require("axios").default;
 const PartnerProfile = (props) => {
   const { id } = useParams();
   const [user, setUser] = useState({});
-
   const isMyProfile = Number(id) === props.currentUser;
   const {
     name,
