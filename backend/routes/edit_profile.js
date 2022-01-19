@@ -53,6 +53,19 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     console.log(countryData)
     userInformation.countryData = countryData;
 
+    //save user info(usename, name, bio) to the db
+    let userInfo = await pool.query(`
+    UPDATE users 
+    SET username = $1, 
+    name = $2, 
+    bio = $3 
+    WHERE id = $4 
+    RETURNING username, name, bio;`, [req.body.username, req.body.name, req.body.bio, req.user.id]);
+    let userData = userInfo.rows;
+    console.log(userData)
+    userInformation.userData = userData;
+
+
     // Select Language id based on language longForm
     let nativeLanguageId = await pool.query(`
     SELECT id FROM Languages
@@ -69,23 +82,12 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE
     user_id = $2
     RETURNING *;`, [nativeLanguageIdData, req.user.id]);
-    console.log(user.language)
+    console.log("language.rows")
+    console.log(language.rows)
     let languageData = language.rows;
     console.log("languageData")
     console.log(languageData)
     userInformation.languageData = languageData;
-
-    //save user info(usename, name, bio) to the db
-    let userInfo = await pool.query(`
-    UPDATE users 
-    SET username = $1, 
-    name = $2, 
-    bio = $3 
-    WHERE id = $4 
-    RETURNING username, name, bio;`, [req.body.username, req.body.name, req.body.bio, req.user.id]);
-    let userData = userInfo.rows;
-    console.log(userData)
-    userInformation.userData = userData;
 
     res.json(userInformation);
 
