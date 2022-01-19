@@ -66,28 +66,35 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     userInformation.userData = userData;
 
 
-    // Select Language id based on language longForm
-    let nativeLanguageId = await pool.query(`
-    SELECT id FROM Languages
-    WHERE longForm = $1;`, [req.body.nativeLanguage]);
-    let nativeLanguageIdData = nativeLanguageId.rows[0].id;
-    console.log("nativeLanguageIdData")
-    console.log(nativeLanguageIdData)
+    // // Select Language id based on language longForm
+    // let nativeLanguageId = await pool.query(`
+    // SELECT id FROM Languages
+    // WHERE longForm = $1;`, [req.body.nativeLanguage]);
+    // let nativeLanguageIdData = nativeLanguageId.rows[0].id;
+    // console.log("nativeLanguageIdData")
+    // console.log(nativeLanguageIdData)
 
-    // Update db with Native Language Info
-    let language = await pool.query(`
-    UPDATE userLanguages
-    SET language_id = $1,
-    nativeLanguage = true
-    WHERE
-    user_id = $2
-    RETURNING *;`, [nativeLanguageIdData, req.user.id]);
-    console.log("language.rows")
-    console.log(language.rows)
-    let languageData = language.rows;
-    console.log("languageData")
-    console.log(languageData)
-    userInformation.languageData = languageData;
+    // let insertLanguages = await pool.query(`
+    // SELECT id FROM Languages
+    // WHERE longForm = $1;`, [req.body.nativeLanguage]);
+    // let nativeLanguageIdData = nativeLanguageId.rows[0].id;
+    // console.log("nativeLanguageIdData")
+    // console.log(nativeLanguageIdData)
+
+    // // Update db with Native Language Info
+    // let language = await pool.query(`
+    // UPDATE userLanguages
+    // SET language_id = $1,
+    // nativeLanguage = true
+    // WHERE
+    // user_id = $2
+    // RETURNING *;`, [nativeLanguageIdData, req.user.id]);
+    // console.log("language.rows")
+    // console.log(language.rows)
+    // let languageData = language.rows;
+    // console.log("languageData")
+    // console.log(languageData)
+    // userInformation.languageData = languageData;
 
     res.json(userInformation);
 
