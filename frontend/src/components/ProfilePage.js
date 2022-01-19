@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import "../styles/ProfilePartner.scss";
 import Navbar from "./layout/Navbar";
 import Header from "./layout/Header";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 
 const PartnerProfile = (props) => {
+  let navigate = useNavigate();
   const { id } = useParams();
   const [user, setUser] = useState({});
   const isMyProfile = Number(id) === props.currentUser;
@@ -34,8 +36,7 @@ const PartnerProfile = (props) => {
   }, [id]);
 
   const messageUser = () => {
-    // check if a conversation exists between the two users
-    console.log(id, props.currentUser);
+    navigate(`/conversation/${id}`);
   };
 
   return (

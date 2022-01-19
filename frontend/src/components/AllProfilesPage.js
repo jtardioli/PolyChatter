@@ -32,7 +32,7 @@ const AllProfilesPage = (props) => {
       <Header />
       <div className="scroll">{users && allProfiles}</div>
 
-      <Navbar currentUser={props.currentUser} />
+      <Navbar currentUser={props.cu} />
     </div>
   );
 };

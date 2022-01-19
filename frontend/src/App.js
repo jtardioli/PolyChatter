@@ -48,6 +48,7 @@ const App = () => {
           element={<AllProfilesPage currentUser={currentUser.id} />}
         ></Route>
         <Route path="/conversations" element={<AllConversationsPage />}></Route>
+
         <Route
           path="/profile/:id"
           element={<ProfilePage currentUser={currentUser.id} />}
