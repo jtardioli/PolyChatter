@@ -33,6 +33,11 @@ const PartnerProfile = (props) => {
       });
   }, [id]);
 
+  const messageUser = () => {
+    // check if a conversation exists between the two users
+    console.log(id, props.currentUser);
+  };
+
   return (
     <div>
       <Header isMyProfile={isMyProfile} />
@@ -50,6 +55,7 @@ const PartnerProfile = (props) => {
         </p>
         <p>{bio}</p>
       </div>
+      {!isMyProfile && <div onClick={messageUser}>Message</div>}
       <Navbar currentUser={props.currentUser} />
     </div>
   );

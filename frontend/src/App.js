@@ -12,7 +12,6 @@ const axios = require("axios").default;
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
-  // const token = localStorage.getItem("token");
   const token = Cookies.get("token"); // => 'value'
   if (!token) {
     // window.history.pushState({}, undefined, "/login");
