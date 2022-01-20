@@ -21,6 +21,7 @@ const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const editProfileRouter = require("./routes/edit_profile");
+const consversationsRouter = require("./routes/conversations");
 
 const app = express();
 
@@ -44,5 +45,6 @@ app.use("/api", profileRouter);
 app.use("/api", usersRouter);
 app.use("/api", authRouter);
 app.use("/api", editProfileRouter);
+app.use("/api", consversationsRouter);
 
 module.exports = app;

@@ -1,26 +1,23 @@
+
 INSERT INTO conversations (
   userA_id,
   userB_id)
 VALUES (
-  1,
-  2
+  7,
+  1
 );
 
 INSERT INTO conversations (
   userA_id,
   userB_id)
 VALUES (
-  3,
-  4
+  2,
+  7
 );
-
 INSERT INTO conversations (
   userA_id,
   userB_id)
 VALUES (
-  5,
-  6
+  2,
+  3
 );
-
-
-
