@@ -32,7 +32,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $2 
     RETURNING image;`, [imageURL, req.user.id]);
     let imageData = image.rows;
-    console.log(imageData)
+    //console.log(imageData)
     userInformation.imageData = imageData;
   }
     // Get Country id based on it's name
@@ -40,7 +40,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT id FROM countries
     WHERE countryName = $1;`, [req.body.country]);
     let countryIdData = countryId.rows[0].id;
-    console.log(countryIdData)
+    //console.log(countryIdData)
 
     // Update Country id in Users table
     let country = await pool.query(`
@@ -49,8 +49,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE users.id = $2
     RETURNING *;`, [countryIdData, req.user.id]);
     let countryData = country.rows;
-    console.log("countryData")
-    console.log(countryData)
+    // console.log("countryData")
+    // console.log(countryData)
     userInformation.countryData = countryData;
 
     //save user info(usename, name, bio) to the db
@@ -62,7 +62,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $4 
     RETURNING username, name, bio;`, [req.body.username, req.body.name, req.body.bio, req.user.id]);
     let userData = userInfo.rows;
-    console.log(userData)
+    // console.log(userData)
     userInformation.userData = userData;
 
     //NATIVE LABGUAGE
@@ -71,8 +71,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT id FROM Languages
     WHERE longForm = $1;`, [req.body.nativeLanguage]);
     let nativeLanguageIdData = nativeLanguageId.rows[0].id;
-    console.log("nativeLanguageIdData")
-    console.log(nativeLanguageIdData)
+    // console.log("nativeLanguageIdData")
+    // console.log(nativeLanguageIdData)
 
     //insert native language details into userLanguages bridge table 
     let insertNativeLanguage = await pool.query(`
@@ -87,11 +87,11 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
       true
     ) 
     RETURNING *;`, [req.user.id, nativeLanguageIdData]);
-    console.log("insertNativeLanguage")
-    console.log(insertNativeLanguage)
+    // console.log("insertNativeLanguage")
+    // console.log(insertNativeLanguage)
     let nativeLanguageData = insertNativeLanguage.rows[0];
-    console.log("nativeLanguageData")
-    console.log(nativeLanguageData)
+    // console.log("nativeLanguageData")
+    // console.log(nativeLanguageData)
     userInformation.nativeLanguageData = nativeLanguageData;
 
     //TARGET LANGUAGE
@@ -100,8 +100,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT id FROM Languages
     WHERE longForm = $1;`, [req.body.targetLanguage]);
     let targetLanguageIdData = targetLanguageId.rows[0].id;
-    console.log("targetLanguageIdData")
-    console.log(targetLanguageIdData)
+    // console.log("targetLanguageIdData")
+    // console.log(targetLanguageIdData)
 
     //insert target language details into userLanguages bridge table 
     let insertTargetLanguage = await pool.query(`
@@ -116,13 +116,13 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
       false
     ) 
     RETURNING *;`, [req.user.id, targetLanguageIdData]);
-    console.log("insertTargetLanguage")
-    console.log(insertTargetLanguage)
+    // console.log("insertTargetLanguage")
+    // console.log(insertTargetLanguage)
     let targetLanguageData = insertTargetLanguage.rows[0];
-    console.log("targetLanguageData")
-    console.log(targetLanguageData)
+    // console.log("targetLanguageData")
+    // console.log(targetLanguageData)
     userInformation.targetLanguageData = targetLanguageData;
-
+      console.log(userInformation)
     res.json(userInformation);
 
   } catch (err) {
