@@ -7,6 +7,7 @@ import AllProfilesPage from "./components/AllProfilesPage";
 import EditProfilePage from "./components/EditProfilePage";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
+import { ConversationPage } from "./components/ConversationPage";
 
 const axios = require("axios").default;
 
@@ -51,6 +52,10 @@ const App = () => {
         <Route
           path="/profile/:id"
           element={<ProfilePage currentUser={currentUser.id} />}
+        ></Route>
+        <Route
+          path="/conversation/:id"
+          element={<ConversationPage currentUser={currentUser.id} />}
         ></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
