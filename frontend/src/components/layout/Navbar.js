@@ -4,7 +4,7 @@ import "../../styles/layout/Navbar.scss";
 
 const Navbar = (props) => {
   let navigate = useNavigate();
-
+  console.log("NAV", props.currentUser);
   return (
     <ul className="navbar">
       <li>

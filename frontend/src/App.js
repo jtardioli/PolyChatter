@@ -43,7 +43,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AllProfilesPage />}></Route>
+        <Route
+          path="/"
+          element={<AllProfilesPage currentUser={currentUser.id} />}
+        ></Route>
         <Route path="/conversations" element={<AllConversationsPage />}></Route>
         <Route
           path="/profile/:id"

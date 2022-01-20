@@ -5,6 +5,7 @@ import AllProfilesBlock from "./profileblocks/AllProfilesBlock";
 const axios = require("axios").default;
 
 const AllProfilesPage = (props) => {
+  console.log("ALL PPPP", props.currentUser);
   const [users, setUsers] = useState(null);
   // Grab users from DB
   useEffect(() => {
@@ -32,7 +33,7 @@ const AllProfilesPage = (props) => {
       <Header />
       <div className="scroll">{users && allProfiles}</div>
 
-      <Navbar currentUser={props.cu} />
+      <Navbar currentUser={props.currentUser} />
     </div>
   );
 };
