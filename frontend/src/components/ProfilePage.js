@@ -1,9 +1,11 @@
 import Navbar from "./layout/Navbar";
 import Header from "./layout/Header";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 const axios = require("axios").default;
 
-const PartnerProfile = (props) => {
+const ProfilePage = (props) => {
   let navigate = useNavigate();
   const { id } = useParams();
   const [user, setUser] = useState({});
@@ -18,6 +20,17 @@ const PartnerProfile = (props) => {
     nativeLanguage,
     targetLanguage,
   } = user;
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.history.pushState({}, undefined, "/login");
+  }
+  console.log("token -----", token);
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
 
   useEffect(() => {
     if (token) {

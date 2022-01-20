@@ -6,6 +6,7 @@ import ProfilePage from "./components/ProfilePage";
 import AllProfilesPage from "./components/AllProfilesPage";
 import EditProfilePage from "./components/EditProfilePage";
 import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
 const axios = require("axios").default;
 
@@ -44,7 +45,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AllProfilesPage />}></Route>
         <Route path="/conversations" element={<AllConversationsPage />}></Route>
-
         <Route
           path="/profile/:id"
           element={<ProfilePage currentUser={currentUser.id} />}
