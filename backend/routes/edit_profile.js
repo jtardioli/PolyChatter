@@ -161,7 +161,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT longForm
     FROM Languages
     JOIN userLanguages on userLanguages.language_id = Languages.id
-    WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
+    WHERE userLanguages.user_id = $1 AND nativeLanguage = $2 LIMIT 1
     ;`, [ req.user.id, true]);
     let nativeLanguage = nativeUserLangInfo.rows[0].longform;
     console.log("nativeUserLangInfo")
@@ -175,7 +175,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT longForm
     FROM Languages
     JOIN userLanguages on userLanguages.language_id = Languages.id
-    WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
+    WHERE userLanguages.user_id = $1 AND nativeLanguage = $2 LIMIT 1
     ;`, [ req.user.id, false]);
     console.log("targetUserLangInfo")
     console.log(targetUserLangInfo)
