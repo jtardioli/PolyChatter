@@ -42,4 +42,27 @@ router.get(
   }
 );
 
-module.exports = router;
+router.get(
+  "/conversation/:id/",
+  validateJWTTokenMiddleware,
+  async (req, res) => {
+    try {
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
+
+module.exports = function (io) {
+  //Socket.IO
+  io.on("connection", function (socket) {
+    console.log("User has connected to Conversations");
+    //ON Events
+    // socket.on("admin", function () {
+    //   console.log("Successful Socket Test");
+    // });
+
+    //End ON Events
+  });
+  return router;
+};

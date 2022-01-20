@@ -16,14 +16,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const app = express();
+// app.io = require("socket.io")();
+
+app.io = require("socket.io")({
+  cors: { origin: "*", methods: ["GET", "POST"] },
+});
+
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const editProfileRouter = require("./routes/edit_profile");
-const consversationsRouter = require("./routes/conversations");
+const consversationsRouter = require("./routes/conversations")(app.io);
 
-const app = express();
+// const io = require("socket.io")(5000);
+// io.on("connection", (socket) => {
+//   console.log(socket.id);
+// });
 
 app.use(logger("dev"));
 app.use(express.json()); // req.body
