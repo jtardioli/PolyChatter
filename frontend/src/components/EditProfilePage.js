@@ -3,6 +3,7 @@ import Header from "./layout/Header";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 import "../styles/layout/EditProfilePage.scss";
 
@@ -21,6 +22,8 @@ const EditProfilePage = () => {
   console.log(user)
 
   const [image, setImage] = useState("");
+
+  let navigate = useNavigate();
   
   const token = localStorage.getItem("token");
   if (!token) {
@@ -61,12 +64,16 @@ const EditProfilePage = () => {
     data.append('targetLanguage', user.targetLanguage);
     
     let url = "http://localhost:5000/api/profile/edit";
-    
+
     // receive two parameter endpoint url ,form data
     axios.post(url, data, config).then(res => { // then print response status
         console.warn(res);
     })
 
+    const redirect = () => {
+      navigate(`/profile/${user.id}`);
+    }
+    redirect();
   }
 
   const handleInputChange = (event) => {
@@ -85,8 +92,24 @@ const EditProfilePage = () => {
       <Header />
       <p>This is the EditProfilePage</p>
       <Navbar />
+      <div> 
+        
+      </div>
+    
       <form className="vertical">
       <img src={user.image}  width="200" height="200" />
+      
+      <label>
+          Image
+          <input 
+            onChange={handleInputChange}
+            // onChange={handleInput}
+            type="file"
+            name="image"
+
+          />
+        </label>
+      
       <label>
           Name
           <input
@@ -116,17 +139,6 @@ const EditProfilePage = () => {
             type="text"
             name="bio"
             value={user.bio}
-          />
-        </label>
-
-        <label>
-          Image
-          <input 
-            onChange={handleInputChange}
-            // onChange={handleInput}
-            type="file"
-            name="image"
-
           />
         </label>
 
