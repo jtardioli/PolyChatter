@@ -4,7 +4,6 @@ const { sign, verify } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
-  console.log(req.body);
   const { username, name, email, password } = req.body;
 
   try {
@@ -15,7 +14,7 @@ exports.register = async (req, res) => {
     VALUES ($1, $2, $3, $4);`,
       [username, name, email, hashedPassword]
     );
-    console.log("hello");
+
     res.status(201).json({
       success: true,
       message: "Registration Successful",
@@ -29,7 +28,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   let user = req.user;
-  console.log(user);
+
   let payload = {
     id: user.id,
     email: user.email,

@@ -8,6 +8,7 @@ import EditProfilePage from "./components/EditProfilePage";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { ConversationPage } from "./components/ConversationPage";
+import { io, Socket } from "socket.io-client";
 
 const axios = require("axios").default;
 
@@ -40,6 +41,8 @@ const App = () => {
         });
     }
   }, []);
+
+  const socket = io("http://localhost:5000");
 
   return (
     <Router>

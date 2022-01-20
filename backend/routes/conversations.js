@@ -11,16 +11,6 @@ router.get(
   async (req, res) => {
     const userid = req.user.id;
     try {
-      // if user a = curuser => info userb
-      // select * from conversations
-      // Join users on userb_id = users.id
-      // where usera_id = $1
-      // =================================
-      // select * from conversations
-      // Join users on usera_id = users.id
-      // where userb_id = $1
-      // =================================
-      // SELECT x.a, y.b FROM (SELECT * from a) as x, (SELECT * FROM b) as y
       let allConversations = await pool.query(
         `
         
@@ -41,6 +31,33 @@ router.get(
     }
   }
 );
+router.get(
+  "/conversation-user-info/:id",
+  validateJWTTokenMiddleware,
+  async (req, res) => {
+    const userid = req.user.id;
+    const conversationid = req.params.id;
+    try {
+      let allConversations = await pool.query(
+        `
+        
+        select * from conversations
+          Join users on userb_id = users.id
+          where usera_id = $1 and conversations.id = $2
+          union
+        select * from conversations
+          Join users on usera_id = users.id
+          where userb_id = $1 and conversations.id = $2
+      ;`,
+        [userid, conversationid]
+      );
+      allConversations = allConversations.rows;
+      res.send(allConversations);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
 
 router.get(
   "/conversation/:id/",
@@ -53,16 +70,12 @@ router.get(
   }
 );
 
+let connected = 0;
+
 module.exports = function (io) {
   //Socket.IO
   io.on("connection", function (socket) {
-    console.log("User has connected to Conversations");
-    //ON Events
-    // socket.on("admin", function () {
-    //   console.log("Successful Socket Test");
-    // });
-
-    //End ON Events
+    console.log("connected: ", socket.id);
   });
   return router;
 };

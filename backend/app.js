@@ -17,7 +17,7 @@ cloudinary.config({
 });
 
 const app = express();
-// app.io = require("socket.io")();
+const http = require("http");
 
 app.io = require("socket.io")({
   cors: { origin: "*", methods: ["GET", "POST"] },
@@ -30,16 +30,10 @@ const profileRouter = require("./routes/profile");
 const editProfileRouter = require("./routes/edit_profile");
 const consversationsRouter = require("./routes/conversations")(app.io);
 
-// const io = require("socket.io")(5000);
-// io.on("connection", (socket) => {
-//   console.log(socket.id);
-// });
-
 app.use(logger("dev"));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: false }));
-// app.use(cors({ origin: true }));
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors());
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
@@ -57,4 +51,18 @@ app.use("/api", authRouter);
 app.use("/api", editProfileRouter);
 app.use("/api", consversationsRouter);
 
-module.exports = app;
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("User connected", socket.id);
+});
+
+server.listen(process.env.PORT, () => {
+  console.log("listening on *:5000");
+});
