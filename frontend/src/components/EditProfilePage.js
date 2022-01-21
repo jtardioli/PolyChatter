@@ -15,7 +15,7 @@ const EditProfilePage = () => {
     name:"",
     username:"",
     bio:"",
-    countryname:"",
+    countryData:"",
     nativeLanguage:"",
     targetLanguage:""
   });
@@ -59,7 +59,7 @@ const EditProfilePage = () => {
     data.append('name', user.name);
     data.append('username', user.username);
     data.append('bio', user.bio);
-    data.append('country', user.countryname);
+    data.append('country', user.countryData);
     data.append('nativeLanguage', user.nativeLanguage);
     data.append('targetLanguage', user.targetLanguage);
     
@@ -148,8 +148,8 @@ const EditProfilePage = () => {
             // onChange={(e) => setCountry(e.target.value)}
             onChange={handleInput}
             type="text"
-            name="countryname"
-            value={user.countryname}
+            name="countryData"
+            value={user.countryData}
           />
         </label>
         <label>

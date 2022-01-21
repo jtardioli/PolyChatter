@@ -4,23 +4,79 @@ const { sign, verify } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
-  console.log(req.body);
-  const { username, name, email, password } = req.body;
+  //console.log(req.body);
+  const { username, name, email, password, countryName, targetLanguage, nativeLanguage } = req.body;
 
   try {
     const hashedPassword = await hash(password, 10);
+    let userInformation = {};
 
-    await pool.query(
+    let userInfo = await pool.query(
       `INSERT INTO users (username, name, email, password)
-    VALUES ($1, $2, $3, $4);`,
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;`,
       [username, name, email, hashedPassword]
     );
-    console.log("hello");
+    //console.log(userInfo);
+    userInformation.userInfo = userInfo.rows[0];
+      
+    //Get Country id based on it's name
+    let countryId = await pool.query(`
+    SELECT id FROM countries
+    WHERE countryName = $1;`, [countryName]);
+    // console.log("countryId.rows==========")
+    // console.log(countryId)
+    let countryIdData = countryId.rows[0].id;
+
+    // Update Country id in Users table
+    let country = await pool.query(`
+    UPDATE users
+    SET country_id = $1
+    WHERE users.email = $2
+    RETURNING *;`, [countryIdData, email]);
+    let countryData = country.rows;
+    userInformation.userInfo.country_id = countryData[0].country_id;
+
+    //NATIVE LANGUAGE
+    // display name of a Language
+    let nativeUserLangInfo = await pool.query(`
+    SELECT id
+    FROM Languages
+    WHERE longForm = $1
+    ;`, [nativeLanguage]);
+    // console.log("nativeUserLangInfo=====================")
+    // console.log(nativeLanguage)
+    // console.log(nativeUserLangInfo)
+    let nativeLanguageId = nativeUserLangInfo.rows[0].id//.longform;
+    // userInformation.userData[0].nativeLanguage = nativeLanguage;
+
+    let nativeUserLangData = await pool.query(`
+    INSERT INTO userLanguages (
+      user_id,
+      language_id,
+      nativeLanguage)
+    VALUES (
+      $1,
+      $2,
+      $3
+    ) RETURNING *
+    ;`, [userInformation.userInfo.id, nativeLanguageId, true]);
+    // console.log("userInfo")
+    // console.log(userInfo)
+    // console.log("nativeUserLangInfo")
+    let nativeLanguageData = nativeUserLangData.rows[0]//.longform;
+    // console.log(nativeUserLangData)
+    userInformation.userInfo.nativeLanguageData = nativeLanguageData;
+    console.log(userInformation)
+    //res.json(userInformation);
+
+    // console.log("hello");
     res.status(201).json({
       success: true,
       message: "Registration Successful",
     });
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       error: err.message,
     });
