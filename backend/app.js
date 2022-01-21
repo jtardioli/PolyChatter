@@ -39,6 +39,7 @@ app.use(logger("dev"));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: false }));
 // app.use(cors({ origin: true }));
+// app.use(cors());
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
