@@ -53,16 +53,24 @@ router.get(
   }
 );
 
-module.exports = function (io) {
+module.exports =  (io) => {
   //Socket.IO
-  io.on("connection", function (socket) {
+  io.on("connection",  (socket) => {
     console.log("User has connected to Conversations");
-    //ON Events
-    // socket.on("admin", function () {
+    // ON Events
+    // socket.on("chat message", function (message) {
     //   console.log("Successful Socket Test");
     // });
+    // End ON Events
 
-    //End ON Events
+    socket.on('message', ({ name, message }) => {
+      io.emit('message', {name, message})
+    })  
+  
+    socket.on("disconnect", () => {
+      console.log('user disconnected');
+    });
+
   });
   return router;
 };
