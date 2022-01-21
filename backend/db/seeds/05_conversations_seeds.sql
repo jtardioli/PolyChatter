@@ -3,7 +3,7 @@ INSERT INTO conversations (
   userA_id,
   userB_id)
 VALUES (
-  7,
+  6,
   1
 );
 
@@ -12,7 +12,7 @@ INSERT INTO conversations (
   userB_id)
 VALUES (
   2,
-  7
+  6
 );
 INSERT INTO conversations (
   userA_id,

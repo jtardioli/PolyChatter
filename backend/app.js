@@ -33,7 +33,12 @@ const consversationsRouter = require("./routes/conversations")(app.io);
 app.use(logger("dev"));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: false }));
+<<<<<<< HEAD
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+=======
+// app.use(cors({ origin: true }));
+app.use(cors());
+>>>>>>> 76cd10bb3731ceb1d932c1c305285007920b06ed
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
