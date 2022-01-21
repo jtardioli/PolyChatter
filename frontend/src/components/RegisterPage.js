@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 
 const RegisterPage = () => {
@@ -9,6 +10,8 @@ const RegisterPage = () => {
   const [targetLanguage, setTargetLanguage] = useState("");
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [countryName, setCountryName] = useState("");
+
+  let navigate = useNavigate();
 
   const registerUser = () => {
     console.log(name, username, email, password, countryName, targetLanguage, nativeLanguage);
@@ -22,6 +25,11 @@ const RegisterPage = () => {
       .catch(function (error) {
         console.log(error);
       });
+
+      const redirect = () => {
+        navigate(`/all-profiles`);
+      }
+      redirect();
   };
 
   return (

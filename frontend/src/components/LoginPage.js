@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 
 const LoginPage = () => {
@@ -8,6 +9,8 @@ const LoginPage = () => {
   if (token) {
     window.history.pushState({}, undefined, "/");
   }
+
+  let navigate = useNavigate();
 
   const loginUser = () => {
     const newUser = { email, password };
@@ -26,6 +29,11 @@ const LoginPage = () => {
       .catch(function (error) {
         console.log(error);
       });
+
+      const redirect = () => {
+        navigate(`/all-profiles`);
+      }
+      redirect();
   };
 
   return (
