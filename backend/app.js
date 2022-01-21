@@ -33,7 +33,7 @@ const consversationsRouter = require("./routes/conversations")(app.io);
 app.use(logger("dev"));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
@@ -59,8 +59,18 @@ const io = require("socket.io")(server, {
   },
 });
 
+const users = {};
+
 io.on("connection", (socket) => {
-  console.log("User connected", socket.id);
+  console.log("User Connected:", socket.id);
+  console.log(users);
+
+  socket.on("userID", (userID) => {
+    if (userID) users[userID] = socket.id;
+  });
+  socket.on("send-message", (test, to, convo) => {
+    console.log(test, to, convo);
+  });
 });
 
 server.listen(process.env.PORT, () => {

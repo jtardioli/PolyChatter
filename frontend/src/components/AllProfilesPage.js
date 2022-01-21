@@ -5,7 +5,6 @@ import AllProfilesBlock from "./profileblocks/AllProfilesBlock";
 const axios = require("axios").default;
 
 const AllProfilesPage = (props) => {
-  console.log("ALL PPPP", props.currentUser);
   const [users, setUsers] = useState(null);
   // Grab users from DB
   useEffect(() => {
