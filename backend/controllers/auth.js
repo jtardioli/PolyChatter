@@ -37,8 +37,7 @@ exports.register = async (req, res) => {
     let countryData = country.rows;
     userInformation.userInfo.country_id = countryData[0].country_id;
 
-    //NATIVE LANGUAGE
-    // display name of a Language
+    // Display Native Language
     let nativeUserLangInfo = await pool.query(`
     SELECT id
     FROM Languages
@@ -69,6 +68,37 @@ exports.register = async (req, res) => {
     userInformation.userInfo.nativeLanguageData = nativeLanguageData;
     console.log(userInformation)
     //res.json(userInformation);
+
+
+    // Display Target Language
+    let targetUserLangInfo = await pool.query(`
+    SELECT id
+    FROM Languages
+    WHERE longForm = $1
+    ;`, [targetLanguage]);
+    // console.log("targetUserLangInfo=====================")
+    // console.log(targetLanguage)
+    // console.log(targetUserLangInfo)
+    let targetLanguageId = targetUserLangInfo.rows[0].id//.longform;
+    // userInformation.userData[0].targetLanguage = targetLanguage;
+
+    let targetUserLangData = await pool.query(`
+    INSERT INTO userLanguages (
+      user_id,
+      language_id,
+      nativeLanguage)
+    VALUES (
+      $1,
+      $2,
+      $3
+    ) RETURNING *
+    ;`, [userInformation.userInfo.id, targetLanguageId, false]);
+    // console.log("userInfo")
+    // console.log(userInfo)
+    // console.log("nativeUserLangInfo")
+    let targetLanguageData = targetUserLangData.rows[0]//.longform;
+    userInformation.userInfo.targetLanguageData = targetLanguageData;
+    // console.log(userInformation)
 
     // console.log("hello");
     res.status(201).json({

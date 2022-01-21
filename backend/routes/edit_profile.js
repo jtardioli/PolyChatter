@@ -5,11 +5,11 @@ const { validateJWTTokenMiddleware } = require("../middlewares/auth-middleware")
 const cloudinary = require('cloudinary')
 
 
-// Save Users Information from Edit Profile Page
+// Save Users Information entered from Edit Profile Page
 router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   
   console.log("Edit profile POST")
-   console.log(req.body)
+  //  console.log(req.body)
 
  try {
   let imageURL = "";
@@ -25,7 +25,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
       imageURL = result.url; 
     });
 
-    // only if image is uploaded, save the url to the db
+    // Only if image is uploaded, save the url to the db
     let image = await pool.query(`
     UPDATE users 
     SET image = $1 
@@ -37,7 +37,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   }
 
 
-    //save user info(usename, name, bio) to the db
+    //Save user info(usename, name, bio) to the db
     let userInfo = await pool.query(`
     UPDATE users 
     SET username = $1, 
@@ -54,8 +54,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     let countryId = await pool.query(`
     SELECT countries.id FROM countries
     WHERE countries.countryName = $1;`, [req.body.country]);
-    console.log("countryId==========")
-    console.log(countryId)
+    // console.log("countryId==========")
+    // console.log(countryId)
     let countryIdData = countryId.rows[0].id;
 
     // Update Country id in Users table
@@ -69,64 +69,48 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     // console.log(countryData)
     userInformation.userData[0].countryData = countryData;
 
-    // //NATIVE LABGUAGE
-    // // Select Language id based on language name (longForm)
-    // let nativeLanguageId = await pool.query(`
-    // SELECT id FROM Languages
-    // WHERE longForm = $1;`, [req.body.nativeLanguage]);
-    // let nativeLanguageIdData = nativeLanguageId.rows[0].id;
+    // Select Native Language id based on language name (longForm)
+    let nativeLanguageId = await pool.query(`
+    SELECT id FROM Languages
+    WHERE longForm = $1;`, [req.body.nativeLanguage]);
+    let nativeLanguageIdData = nativeLanguageId.rows[0].id;
     // console.log("nativeLanguageId=============")
     // console.log(nativeLanguageId)
 
-    // //insert native language details into userLanguages bridge table 
-    // let insertNativeLanguage = await pool.query(`
-    // INSERT INTO userLanguages (
-    //   user_id,
-    //   language_id,
-    //   nativeLanguage
-    // )
-    // VALUES (
-    //   $1,
-    //   $2,
-    //   true
-    // ) 
-    // RETURNING *;`, [req.user.id, nativeLanguageIdData]);
-    // // console.log("insertNativeLanguage")
-    // // console.log(insertNativeLanguage)
-    // let nativeLanguageData = insertNativeLanguage.rows[0];
-    // // console.log("nativeLanguageData")
-    // // console.log(nativeLanguageData)
-    // userInformation.nativeLanguageData = nativeLanguageData;
+    //Insert Native Language details into userLanguages bridge table 
+    let insertNativeLanguage = await pool.query(`
+    UPDATE userLanguages
+    SET language_id = $1
+    WHERE user_id =$2 AND nativeLanguage = true
+    RETURNING *;`, [nativeLanguageIdData, req.user.id ]);
+    console.log("insertNativeLanguage")
+    console.log(insertNativeLanguage)
+    let nativeLanguageData = insertNativeLanguage.rows[0];
+    console.log("nativeLanguageData")
+    console.log(nativeLanguageData)
+    userInformation.nativeLanguageData = nativeLanguageData;
 
-    // //TARGET LANGUAGE
-    // // Select Language id based on language longForm
-    // let targetLanguageId = await pool.query(`
-    // SELECT id FROM Languages
-    // WHERE longForm = $1;`, [req.body.targetLanguage]);
-    // let targetLanguageIdData = targetLanguageId.rows[0].id;
-    // // console.log("targetLanguageIdData")
-    // // console.log(targetLanguageIdData)
+    // Select Target Language id based on language longForm
+    let targetLanguageId = await pool.query(`
+    SELECT id FROM Languages
+    WHERE longForm = $1;`, [req.body.targetLanguage]);
+    let targetLanguageIdData = targetLanguageId.rows[0].id;
+    // console.log("targetLanguageIdData")
+    // console.log(targetLanguageIdData)
 
-    // //insert target language details into userLanguages bridge table 
-    // let insertTargetLanguage = await pool.query(`
-    // INSERT INTO userLanguages (
-    //   user_id,
-    //   language_id,
-    //   nativeLanguage
-    // )
-    // VALUES (
-    //   $1,
-    //   $2,
-    //   false
-    // ) 
-    // RETURNING *;`, [req.user.id, targetLanguageIdData]);
-    // // console.log("insertTargetLanguage")
-    // // console.log(insertTargetLanguage)
-    // let targetLanguageData = insertTargetLanguage.rows[0];
-    // // console.log("targetLanguageData")
-    // // console.log(targetLanguageData)
-    // userInformation.targetLanguageData = targetLanguageData;
-      console.log(userInformation)
+    //Insert target language details into userLanguages bridge table 
+    let insertTargetLanguage = await pool.query(`
+    UPDATE userLanguages
+    SET language_id = $1
+    WHERE user_id =$2 AND nativeLanguage = false
+    RETURNING *;`, [nativeLanguageIdData, req.user.id ]);
+    // console.log("insertTargetLanguage")
+    // console.log(insertTargetLanguage)
+    let targetLanguageData = insertTargetLanguage.rows[0];
+    // console.log("targetLanguageData")
+    // console.log(targetLanguageData)
+    userInformation.targetLanguageData = targetLanguageData;
+      // console.log(userInformation)
 
     res.json(userInformation);
 
@@ -143,7 +127,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
  try {
   let userInformation = {};
 
-    //display users info (username, name, image, email, bio, country)
+    //Display users info (username, name, image, email, bio, country)
     let userInfo = await pool.query(`
     SELECT users.id,
     users.username,
@@ -158,6 +142,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     // console.log(userData)
     userInformation.userData = userData;
 
+    //Display country name
     let countryInfo = await pool.query(`
     SELECT countryName
     FROM countries
@@ -165,37 +150,35 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE users.id = $1
     ;`, [req.user.id]);
     let countryData = countryInfo.rows[0].countryname;
-    console.log("countryData")
-    console.log(countryData)
+    // console.log("countryData")
+    // console.log(countryData)
     userInformation.userData[0].countryData = countryData;
 
-    //NATIVE LANGUAGE
-    // display name of a Language
+    // Display native language
     let nativeUserLangInfo = await pool.query(`
     SELECT longForm
     FROM Languages
     JOIN userLanguages on userLanguages.language_id = Languages.id
     WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
     ;`, [ req.user.id, true]);
-    console.log("nativeUserLangInfo")
-    console.log(nativeUserLangInfo)
+    // console.log("nativeUserLangInfo")
+    // console.log(nativeUserLangInfo)
     let nativeLanguage = nativeUserLangInfo.rows[0].longform;
     // console.log(userLangData)
     userInformation.userData[0].nativeLanguage = nativeLanguage;
 
-    // //TARGET LANGUAGE
-    // // display name of a Language
-    // let targetUserLangInfo = await pool.query(`
-    // SELECT longForm
-    // FROM Languages
-    // JOIN userLanguages on userLanguages.language_id = Languages.id
-    // WHERE userLanguages.user_id = $1 AND nativeLanguage = $2 LIMIT 1
-    // ;`, [ req.user.id, false]);
+    // Display target language
+    let targetUserLangInfo = await pool.query(`
+    SELECT longForm
+    FROM Languages
+    JOIN userLanguages on userLanguages.language_id = Languages.id
+    WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
+    ;`, [ req.user.id, false]);
     // console.log("targetUserLangInfo")
     // console.log(targetUserLangInfo)
-    // let targetLanguage = targetUserLangInfo.rows[0]//.longform;
-    // // console.log(userLangData)
-    // userInformation.userData[0].targetLanguage = targetLanguage;
+    let targetLanguage = targetUserLangInfo.rows[0].longform;
+    // console.log(userLangData)
+    userInformation.userData[0].targetLanguage = targetLanguage;
 
 
 
