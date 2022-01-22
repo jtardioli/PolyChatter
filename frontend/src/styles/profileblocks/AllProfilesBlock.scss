@@ -2,6 +2,7 @@
   height: 145px;
   display: flex;
   align-items: center;
+  max-height: 145px;
 }
 
 .pic-emoji {
@@ -29,6 +30,7 @@
   width: 25px;
   border-radius: 50%;
   border: 2px solid white;
+  overflow: hidden;
 }
 
 .info {

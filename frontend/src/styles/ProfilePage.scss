@@ -1,4 +1,86 @@
+.my-profile-ctn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  z-index: -1;
+}
+
+.img-ctn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 270px;
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80");
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+}
+
 .pfp {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-top: 100px;
+  border: solid white 2px;
+}
+
+.my-profile-ctn h2 {
+  color: rgb(181, 181, 181);
+  font-size: 1.2em;
+  margin-bottom: -15px;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  max-width: 550px;
+  padding-top: 20px;
+}
+
+.profile-divider {
+  width: 100%;
+  height: 30px;
+  border-bottom: rgba(165, 165, 165, 0.297) solid 1px;
+}
+.country-profile {
+  color: rgb(120, 120, 120);
+  font-size: 1.1em;
+}
+
+#map {
+  color: rgb(83, 95, 136);
+}
+
+.vertical-div {
+  height: 30px;
+  border: rgba(165, 165, 165, 0.297) solid 1px;
+}
+
+.bio-ctn {
+  width: 90vw;
+  height: 100%;
+
+  margin: 30px 40px;
+
+  padding: 10px;
+}
+.bio-ctn h4 {
+  font-size: 1.2em;
+  color: rgb(49, 49, 49);
+}
+
+.bio-ctn p {
+  margin-top: 10px;
+  color: rgb(105, 105, 105);
+  line-height: 1.5em;
 }
