@@ -8,7 +8,7 @@ import axios from 'axios';
 import "../styles/EditProfilePage.scss";
 
 
-const EditProfilePage = () => {
+const EditProfilePage = (props) => {
 
   const [user, setUser] = useState({
     id:"",
@@ -90,7 +90,7 @@ const EditProfilePage = () => {
   return (
     <div>
       <Header />
-      <Navbar />
+      <Navbar currentUser={props.currentUser} />
       <div> 
         
       </div>

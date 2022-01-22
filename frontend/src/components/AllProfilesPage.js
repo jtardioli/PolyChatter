@@ -6,6 +6,8 @@ const axios = require("axios").default;
 
 const AllProfilesPage = (props) => {
   const [users, setUsers] = useState(null);
+  console.log("props.currentUser.id")
+  console.log(props)
   // Grab users from DB
   useEffect(() => {
     axios
@@ -21,10 +23,18 @@ const AllProfilesPage = (props) => {
   }, []);
   console.log(users);
   let allProfiles;
+  let profiles;
   if (users) {
-    allProfiles = users.map((user) => {
-      return <AllProfilesBlock key={user.id} user={user} />;
-    });
+    profiles = users.filter((user) => {
+      return user.id !== props.currentUser;
+    })
+    console.log(profiles)
+    allProfiles = profiles.map((user) => {
+        return <AllProfilesBlock key={user.id} user={user} />;
+      });
+    // allProfiles = users.map((user) => {
+    //   return <AllProfilesBlock key={user.id} user={user} />;
+    // });
   }
 
   return (
