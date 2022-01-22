@@ -10,6 +10,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   
   console.log("Edit profile POST")
   //  console.log(req.body)
+  // console.log(req.user.id);
 
  try {
   let imageURL = "";
@@ -57,6 +58,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     // console.log("countryId==========")
     // console.log(countryId)
     let countryIdData = countryId.rows[0].id;
+    // console.log("countryIdData", countryIdData)
+    // return
 
     // Update Country id in Users table
     let country = await pool.query(`
@@ -122,7 +125,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
 // GET request for Edit Profile Page
 router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   console.log("Edit profile GET")
-  // console.log(req.user)
+  // console.log("req.user",req.user)
 
  try {
   let userInformation = {};
@@ -136,10 +139,11 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     users.email,
     users.bio
     FROM users
-    WHERE users.id = $1
+    WHERE id = $1
     ;`, [ req.user.id]);
     let userData = userInfo.rows;
-    // console.log(userData)
+    // console.log("userData", userData)
+    // return
     userInformation.userData = userData;
 
     //Display country name
@@ -149,6 +153,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     JOIN users ON users.country_id = countries.id
     WHERE users.id = $1
     ;`, [req.user.id]);
+    // console.log(countryInfo)
     let countryData = countryInfo.rows[0].countryname;
     // console.log("countryData")
     // console.log(countryData)

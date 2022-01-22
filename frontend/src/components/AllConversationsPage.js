@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import ConversationBlock from "./profileblocks/ConversationBlock";
 const axios = require("axios").default;
 
-const AllConversationsPage = () => {
+const AllConversationsPage = (props) => {
   const [conversations, setConversations] = useState([]);
   const token = Cookies.get("token"); // => 'value'
   if (!token) {
@@ -49,7 +49,7 @@ const AllConversationsPage = () => {
       <Header />
 
       {allConversations}
-      <Navbar />
+      <Navbar currentUser={props.currentUser} />
     </div>
   );
 };
