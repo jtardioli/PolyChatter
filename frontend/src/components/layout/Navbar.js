@@ -10,10 +10,10 @@ const Navbar = (props) => {
       <li>
         <Link to="/conversations">
           <span
-            className="material-icons material-icons-outlined"
             id="nav-icon"
+            className=" material-icons material-icons-outlined"
           >
-            <span className="material-icons-outlined">question_answer</span>
+            question_answer
           </span>
         </Link>
       </li>
