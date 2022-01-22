@@ -9,14 +9,20 @@ const Navbar = (props) => {
     <ul className="navbar">
       <li>
         <Link to="/conversations">
-          <span class="material-icons material-icons-outlined" id="nav-icon">
-            <span class="material-icons-outlined">question_answer</span>
+          <span
+            className="material-icons material-icons-outlined"
+            id="nav-icon"
+          >
+            <span className="material-icons-outlined">question_answer</span>
           </span>
         </Link>
       </li>
       <li>
         <Link to="/">
-          <span class="material-icons material-icons-outlined" id="nav-icon">
+          <span
+            className="material-icons material-icons-outlined"
+            id="nav-icon"
+          >
             explore
           </span>
         </Link>
@@ -26,7 +32,7 @@ const Navbar = (props) => {
           navigate(`/profile/${props.currentUser}`);
         }}
       >
-        <span class="material-icons material-icons-outlined" id="nav-icon">
+        <span className="material-icons material-icons-outlined" id="nav-icon">
           person
         </span>
       </li>

@@ -20,10 +20,10 @@ exports.register = async (req, res) => {
     let userInformation = {};
 
     let userInfo = await pool.query(
-      `INSERT INTO users (username, name, email, password)
-    VALUES ($1, $2, $3, $4)
+      `INSERT INTO users (username, name, email, password, image)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
-      [username, name, email, hashedPassword]
+      [username, name, email, hashedPassword, 'http://res.cloudinary.com/dtx8hllui/image/upload/v1642474884/4beebce89d681837ba2f4105ce43afac.png.png']
     );
     //console.log(userInfo);
     userInformation.userInfo = userInfo.rows[0];

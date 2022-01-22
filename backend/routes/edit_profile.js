@@ -32,7 +32,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $2 
     RETURNING image;`, [imageURL, req.user.id]);
     let imageData = image.rows;
-    //console.log(imageData)
+    console.log(imageData)
     userInformation.imageData = imageData;
   }
 
@@ -81,14 +81,14 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     let insertNativeLanguage = await pool.query(`
     UPDATE userLanguages
     SET language_id = $1
-    WHERE user_id =$2 AND nativeLanguage = true
-    RETURNING *;`, [nativeLanguageIdData, req.user.id ]);
-    console.log("insertNativeLanguage")
-    console.log(insertNativeLanguage)
+    WHERE user_id =$2 AND nativeLanguage = $3
+    RETURNING *;`, [nativeLanguageIdData, req.user.id, true ]);
+    // console.log("insertNativeLanguage")
+    // console.log(insertNativeLanguage)
     let nativeLanguageData = insertNativeLanguage.rows[0];
-    console.log("nativeLanguageData")
-    console.log(nativeLanguageData)
-    userInformation.nativeLanguageData = nativeLanguageData;
+    // console.log("nativeLanguageData")
+    // console.log(nativeLanguageData)
+    userInformation.userData[0].nativeLanguageData = nativeLanguageData;
 
     // Select Target Language id based on language longForm
     let targetLanguageId = await pool.query(`
@@ -102,14 +102,14 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     let insertTargetLanguage = await pool.query(`
     UPDATE userLanguages
     SET language_id = $1
-    WHERE user_id =$2 AND nativeLanguage = false
-    RETURNING *;`, [nativeLanguageIdData, req.user.id ]);
+    WHERE user_id =$2 AND nativeLanguage = $3
+    RETURNING *;`, [targetLanguageIdData, req.user.id, false ]);
     // console.log("insertTargetLanguage")
     // console.log(insertTargetLanguage)
     let targetLanguageData = insertTargetLanguage.rows[0];
     // console.log("targetLanguageData")
     // console.log(targetLanguageData)
-    userInformation.targetLanguageData = targetLanguageData;
+    userInformation.userData[0].targetLanguageData = targetLanguageData;
       // console.log(userInformation)
 
     res.json(userInformation);

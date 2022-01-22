@@ -48,9 +48,13 @@ const ProfilePage = (props) => {
         <p>
           {countryname} {emoji}
         </p>
-        <p>
+        {/* <p>
           {nativeLanguage &&
             `${nativeLanguage.longform} lvl: ${nativeLanguage.level} =>${targetLanguage.longform} lvl: ${targetLanguage.level} `}
+        </p> */}
+        <p>
+          {nativeLanguage &&
+            `${nativeLanguage.longform} =>${targetLanguage.longform} `}
         </p>
         <p>{bio}</p>
       </div>

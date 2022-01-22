@@ -1,68 +1,78 @@
+import React, { useState, useEffect } from "react";
+import TextField from "@material-ui/core/TextField";
+import "../styles/layout/ConversationPage.scss";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
-import "../styles/ConversationPage.scss";
-import Cookies from "js-cookie";
-import MessageBlock from "../components/profileblocks/MessageBlock";
-import socket from "../socket";
-const axios = require("axios").default;
+const socket = io("http://localhost:5000");
+
 export const ConversationPage = () => {
   const { id } = useParams();
-  const [text, setText] = useState("");
-  const [partner, setPartner] = useState({});
-  const myMes = ["hello", "whats up", "nothing"];
-  const [messages, setMessages] = useState(myMes);
 
-  const token = Cookies.get("token"); // => 'value'
-  if (!token) {
-    // window.history.pushState({}, undefined, "/login");
-  }
+  const [state, setState] = useState({ message: "", name: "" });
+  const [chat, setChat] = useState([]);
 
-  let config = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
+  const onTextChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    if (token) {
-      axios
-        .get(`http://localhost:5000/api/conversation-user-info/${id}`, config)
-        .then(function (response) {
-          setPartner(response.data[0]);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log("ERROROROR ---", error);
-        });
-    }
-  }, []);
-  console.log(partner.id);
-  const handleSubmit = () => {
-    socket.emit("send-message", text, partner.id, id);
+    socket.on("message", ({ name, message }) => {
+      setChat([...chat, { name, message }]);
+    });
+  });
+
+  const onMessageSubmit = (e) => {
+    e.preventDefault();
+    const { name, message } = state;
+    socket.emit("message", { name, message });
+    setState({ message: "", name });
   };
 
-  let allMessages;
-  if (messages) {
-    allMessages = messages.map((message) => {
-      return <MessageBlock key={message} text={message} />;
-    });
-  }
-  console.log(allMessages);
+  const renderChat = () => {
+    return chat.map(({ name, message }, index) => (
+      <div key={index}>
+        <h3>
+          {name}: <span>{message}</span>
+        </h3>
+      </div>
+    ));
+  };
 
   return (
-    <div className="conversation-container">
-      <div className="messages-conatiner">{allMessages}</div>
-      <form className="send-container">
-        <textarea
-          required
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button onClick={handleSubmit} className="send-button">
-          Send
-        </button>
-      </form>
-    </div>
+    <>
+      {/* <div>This is the conversation with id: {id}</div>
+    <button onClick = {() => { socket.emit('chat message')}}>click me</button> */}
+
+      <div className="card">
+        <form onSubmit={onMessageSubmit}>
+          <h1>Messenger</h1>
+          <div className="name-field">
+            <TextField
+              name="name"
+              onChange={(e) => onTextChange(e)}
+              value={state.name}
+              label="Name"
+            />
+          </div>
+          <div className="name-field">
+            <TextField
+              name="message"
+              onChange={(e) => onTextChange(e)}
+              value={state.message}
+              id="outlined-multiline-static"
+              variant="outlined"
+              label="Message"
+            />{" "}
+            <button>translate</button>
+          </div>
+          <button> Send Message</button>
+        </form>
+        <div className="render-chat">
+          <h1>Chat Log</h1>
+          {renderChat()}
+          <button>translate</button>
+        </div>
+      </div>
+    </>
   );
 };
