@@ -19,7 +19,7 @@ const AllProfilesPage = (props) => {
         console.log(error);
       });
   }, []);
-
+  console.log(users);
   let allProfiles;
   if (users) {
     allProfiles = users.map((user) => {
@@ -29,7 +29,7 @@ const AllProfilesPage = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header text="Find Partners" />
       <div className="scroll">{users && allProfiles}</div>
 
       <Navbar currentUser={props.currentUser} />

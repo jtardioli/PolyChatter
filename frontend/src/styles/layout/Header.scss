@@ -1,8 +1,9 @@
 .header {
-  background-color: rgb(116, 185, 116);
   height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
+  border-bottom: solid rgb(211, 211, 211, 0.5) 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }

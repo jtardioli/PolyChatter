@@ -70,17 +70,9 @@ router.get(
   }
 );
 
-<<<<<<< HEAD
-let connected = 0;
-
-module.exports = function (io) {
+module.exports = (io) => {
   //Socket.IO
-  io.on("connection", function (socket) {
-    console.log("connected: ", socket.id);
-=======
-module.exports =  (io) => {
-  //Socket.IO
-  io.on("connection",  (socket) => {
+  io.on("connection", (socket) => {
     console.log("User has connected to Conversations");
     // ON Events
     // socket.on("chat message", function (message) {
@@ -88,15 +80,13 @@ module.exports =  (io) => {
     // });
     // End ON Events
 
-    socket.on('message', ({ name, message }) => {
-      io.emit('message', {name, message})
-    })  
-  
-    socket.on("disconnect", () => {
-      console.log('user disconnected');
+    socket.on("message", ({ name, message }) => {
+      io.emit("message", { name, message });
     });
 
->>>>>>> 76cd10bb3731ceb1d932c1c305285007920b06ed
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
+    });
   });
   return router;
 };

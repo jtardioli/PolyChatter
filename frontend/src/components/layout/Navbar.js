@@ -8,17 +8,27 @@ const Navbar = (props) => {
   return (
     <ul className="navbar">
       <li>
-        <Link to="/conversations">All Chats</Link>
+        <Link to="/conversations">
+          <span class="material-icons material-icons-outlined" id="nav-icon">
+            <span class="material-icons-outlined">question_answer</span>
+          </span>
+        </Link>
       </li>
       <li>
-        <Link to="/">All Profiles</Link>
+        <Link to="/">
+          <span class="material-icons material-icons-outlined" id="nav-icon">
+            explore
+          </span>
+        </Link>
       </li>
       <li
         onClick={() => {
           navigate(`/profile/${props.currentUser}`);
         }}
       >
-        My Profile
+        <span class="material-icons material-icons-outlined" id="nav-icon">
+          person
+        </span>
       </li>
     </ul>
   );
