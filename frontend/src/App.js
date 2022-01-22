@@ -58,7 +58,7 @@ const App = () => {
           path="/"
           element={<AllProfilesPage currentUser={currentUser.id} />}
         ></Route>
-        <Route path="/conversations" element={<AllConversationsPage />}></Route>
+        <Route path="/conversations" element={<AllConversationsPage currentUser={currentUser.id}/>}></Route>
         <Route
           path="/profile/:id"
           element={<ProfilePage currentUser={currentUser.id} />}
@@ -70,7 +70,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/all-profiles" element={<AllProfilesPage />}></Route>
-        <Route path="/profile/edit" element={<EditProfilePage />}></Route>
+        <Route path="/profile/edit" element={<EditProfilePage currentUser={currentUser.id}/>}></Route>
       </Routes>
     </Router>
   );

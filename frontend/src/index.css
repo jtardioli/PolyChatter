@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+<<<<<<< HEAD
+=======
+  /* overflow: hidden; */
+>>>>>>> ade3277fbe3cc91637c157c6e8755444d32df075
 }
 
 body {

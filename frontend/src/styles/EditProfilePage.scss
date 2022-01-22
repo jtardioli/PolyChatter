@@ -1,0 +1,45 @@
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  max-width: 36rem;
+  margin: 7rem auto;
+  position: relative;
+  padding-top: 5rem;
+  border-radius: 3%;
+}
+.label {
+  margin: 0.5rem;
+  float: left;
+  border-bottom: 2rem, black, solid;
+  color: grey;
+  font-size: smaller;
+}
+
+.input {
+  border: gray, thin, solid;
+  min-width: 15rem;
+}
+.half {
+  position: absolute;
+  //margin-bottom: 2rem;
+  top: -4rem;
+	// bottom:30rem;
+  border-radius: 50%;
+}
+.btn {
+  width: 5rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 2px;
+}
+#bio {
+  min-height: 3rem;
+  word-wrap: break-word; 
+}
+.label,.input{
+  display:flex;
+  flex-direction:column;
+}
