@@ -1,19 +1,49 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
 import "../styles/layout/ConversationPage.scss";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import Message from "./Message";
+import PartnerMessage from "./PartnerMessage";
+import Cookies from "js-cookie";
+import axios from "axios";
+import ConversationHeader from "./profileblocks/ConversationHeader";
 const socket = io("http://localhost:5000");
 
 export const ConversationPage = (props) => {
   const { id } = useParams();
-  console.log("This is the current user", props.currentUser);
+
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
+  const [partner, setPartner] = useState({});
+
+  const token = Cookies.get("token"); // => 'value'
+
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`http://localhost:5000/api/conversation-user-info/${id}`, config)
+        .then(function (response) {
+          setPartner(response.data[0]);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log("ERROROROR ---", error);
+        });
+    }
+  }, []);
 
   const onTextChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    setState({
+      ...state,
+      message: e.target.textContent,
+      name: props.currentUser,
+    });
   };
 
   useEffect(() => {
@@ -27,26 +57,39 @@ export const ConversationPage = (props) => {
     const { name, message } = state;
     socket.emit("message", { name, message });
     setState({ message: "", name });
+    document.querySelector(".message-input").innerHTML = "";
+    document.querySelector(".message-input").focus();
   };
 
   const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
-      <Message key={index} name={props.currentUser} message={message} />
-    ));
+    return chat.map(({ name, message }, index) => {
+      if (name === props.currentUser) {
+        return <Message key={index} name={name} message={message} />;
+      } else {
+        return <PartnerMessage key={index} name={name} message={message} />;
+      }
+    });
   };
-
   return (
-    <div>
-      <div className="render-chat">{renderChat()}</div>
+    <div className="chat-page-wrap">
+      <ConversationHeader partner={partner} />
+      <div className="chat-box">{renderChat()}</div>
       <form onSubmit={onMessageSubmit}>
-        <div className="name-field">
-          <input
-            name="message"
-            onChange={(e) => onTextChange(e)}
-            value={state.message}
-          />
-        </div>
-        <button> Send Message</button>
+        <div
+          name="message"
+          onInput={(e) => onTextChange(e)}
+          contentEditable={true}
+          className="message-input"
+        ></div>
+
+        <button className="send-btn">
+          <span
+            id="send-icon"
+            className="material-icons material-icons-outlined"
+          >
+            send
+          </span>
+        </button>
       </form>
     </div>
   );

@@ -28,9 +28,6 @@ const AllConversationsPage = (props) => {
         .catch(function (error) {
           // handle error
           console.log("ERROROROR ---", error);
-        })
-        .then(function () {
-          // always executed
         });
     }
   }, []);

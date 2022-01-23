@@ -14,11 +14,11 @@ router.get(
       let allConversations = await pool.query(
         `
         
-        select * from conversations
+        select conversations.id as convoID, users.*  from conversations
           Join users on userb_id = users.id
           where usera_id = $1
           union
-        select * from conversations
+        select conversations.id as convoID, users.* as id from conversations
           Join users on usera_id = users.id
           where userb_id = $1
       ;`,
@@ -37,6 +37,7 @@ router.get(
   async (req, res) => {
     const userid = req.user.id;
     const conversationid = req.params.id;
+    console.log(userid, req.params.id);
     try {
       let allConversations = await pool.query(
         `
