@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import "../styles/RegisterPage.scss"
 const axios = require("axios").default;
 
 const RegisterPage = () => {
@@ -34,70 +36,82 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <h1>Register</h1>
-      <form>
-        <label>
-          Name
+      <h1>Create new account.</h1>
+      <form className="inpt">
           <input
             onChange={(e) => setName(e.target.value)}
             type="text"
             name="name"
+            placeholder="Name"
+            className="field"
           />
-        </label>
 
-        <label>
-          Username:
+        {/* <label>
+          Username: */}
           <input
             onChange={(e) => setUsername(e.target.value)}
             type="text"
             name="username"
+            placeholder="Username"
+            className="field"
           />
-        </label>
+        {/* </label> */}
 
-        <label>
-          Email:
+        {/* <label>
+          Email: */}
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             name="email"
+            placeholder="Email"
+            className="field"
           />
-        </label>
+        {/* </label> */}
 
-        <label>
-          Password:
+        {/* <label>
+          Password: */}
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             name="password"
+            placeholder="Password"
+            className="field"
           />
-        </label>
+        {/* </label> */}
 
-        <label>
-          Country:
+        {/* <label>
+          Country: */}
           <input
             onChange={(e) => setCountryName(e.target.value)}
             type="countryName"
             name="countryName"
+            placeholder="Country"
+            className="field"
           />
-        </label>
+        {/* </label> */}
 
-        <label>
-          Target Language:
-          <input
-            onChange={(e) => setTargetLanguage(e.target.value)}
-            type="targetLanguage"
-            name="targetLanguage"
-          />
-        </label>
-
-        <label>
-          Native Language:
+        {/* <label>
+          Native Language: */}
           <input
             onChange={(e) => setNativeLanguage(e.target.value)}
             type="nativeLanguage"
             name="nativeLanguage"
+            placeholder="Native Language"
+            className="field"
           />
-        </label>
+        {/* </label> */}
+
+        {/* <label>
+          Target Language: */}
+          <input
+            onChange={(e) => setTargetLanguage(e.target.value)}
+            type="targetLanguage"
+            name="targetLanguage"
+            placeholder="Language Learning"
+            className="field"
+          />
+        {/* </label> */}
+
       </form>
       <button onClick={registerUser}>Register</button>
     </div>
