@@ -113,7 +113,7 @@ const EditProfilePage = (props) => {
           </label>
         </div>
 
-        <label className="label">
+        <label id="name" className="label">
           Name
           <input
             onChange={handleInput}

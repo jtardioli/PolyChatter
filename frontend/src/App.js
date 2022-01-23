@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RegisterPage from "./components/RegisterPage";
+import RegisterPage1 from "./components/RegisterPage1";
 import LoginPage from "./components/LoginPage";
 import AllConversationsPage from "./components/AllConversationsPage";
 import ProfilePage from "./components/ProfilePage";
@@ -60,7 +60,7 @@ const App = () => {
           path="/conversation/:id"
           element={<ConversationPage currentUser={currentUser.id} />}
         ></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/register" element={<RegisterPage1 />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/all-profiles" element={<AllProfilesPage />}></Route>
         <Route
