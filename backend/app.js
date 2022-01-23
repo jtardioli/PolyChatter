@@ -17,7 +17,6 @@ cloudinary.config({
 });
 
 const app = express();
-const http = require("http");
 
 app.io = require("socket.io")({
   cors: { origin: "*", methods: ["GET", "POST"] },
@@ -51,14 +50,4 @@ app.use("/api", authRouter);
 app.use("/api", editProfileRouter);
 app.use("/api", consversationsRouter);
 
-const server = http.createServer(app);
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
-
-server.listen(process.env.PORT, () => {
-  console.log("listening on *:5000");
-});
+module.exports = app;

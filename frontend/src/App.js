@@ -8,7 +8,6 @@ import EditProfilePage from "./components/EditProfilePage";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { ConversationPage } from "./components/ConversationPage";
-import socket from "./socket";
 
 const axios = require("axios").default;
 
@@ -42,15 +41,6 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (currentUser) socket.emit("userID", currentUser.id);
-  }, [currentUser]);
-
-  socket.on("connect", () => {
-    console.log(`You connected with id: ${socket.id}`);
-    if (currentUser) socket.emit("userID", currentUser.id);
-  });
-
   return (
     <Router>
       <Routes>
@@ -58,7 +48,10 @@ const App = () => {
           path="/"
           element={<AllProfilesPage currentUser={currentUser.id} />}
         ></Route>
-        <Route path="/conversations" element={<AllConversationsPage currentUser={currentUser.id}/>}></Route>
+        <Route
+          path="/conversations"
+          element={<AllConversationsPage currentUser={currentUser.id} />}
+        ></Route>
         <Route
           path="/profile/:id"
           element={<ProfilePage currentUser={currentUser.id} />}
@@ -70,7 +63,10 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/all-profiles" element={<AllProfilesPage />}></Route>
-        <Route path="/profile/edit" element={<EditProfilePage currentUser={currentUser.id}/>}></Route>
+        <Route
+          path="/profile/edit"
+          element={<EditProfilePage currentUser={currentUser.id} />}
+        ></Route>
       </Routes>
     </Router>
   );
