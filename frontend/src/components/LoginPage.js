@@ -39,14 +39,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-ctn">
-      <div className="login-wrap">
-        <div className="grey"></div>
-        {/* <img
-          className="login-logo"
-          src="https://i.imgur.com/gPqS1Op.png"
-          alt=""
-        /> */}
-      </div>
+      <div className="login-wrap"></div>
       <div className="login-form-wrap">
         <h1>Welcome Polyglot!</h1>
         <p>Sign in to continue</p>
