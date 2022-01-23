@@ -1,4 +1,5 @@
 .partner-message {
+  position: relative;
   color: black;
   align-self: flex-start;
   background-color: rgb(232, 232, 232);
@@ -14,4 +15,24 @@
   border-top: 1px solid white;
   margin-top: 7px;
   padding-top: 4px;
+  color: rgb(201, 117, 60);
+}
+
+.partner-message div {
+  position: absolute;
+  left: 90%;
+  top: 60%;
+  background-color: rgb(232, 232, 232);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border: rgb(201, 117, 60) 1px solid;
+}
+
+#translate {
+  color: rgb(201, 117, 60);
+  font-size: 1em;
 }
