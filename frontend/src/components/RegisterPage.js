@@ -46,8 +46,8 @@ const RegisterPage = () => {
             className="field"
           />
 
-        {/* <label>
-          Username: */}
+        <label>
+          Username:
           <input
             onChange={(e) => setUsername(e.target.value)}
             type="text"
@@ -55,10 +55,10 @@ const RegisterPage = () => {
             placeholder="Username"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
-        {/* <label>
-          Email: */}
+        <label>
+          Email:
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
@@ -66,10 +66,10 @@ const RegisterPage = () => {
             placeholder="Email"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
-        {/* <label>
-          Password: */}
+        <label>
+          Password:
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
@@ -77,10 +77,10 @@ const RegisterPage = () => {
             placeholder="Password"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
-        {/* <label>
-          Country: */}
+        <label>
+          Country:
           <input
             onChange={(e) => setCountryName(e.target.value)}
             type="countryName"
@@ -88,10 +88,10 @@ const RegisterPage = () => {
             placeholder="Country"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
-        {/* <label>
-          Native Language: */}
+        <label>
+          Native Language:
           <input
             onChange={(e) => setNativeLanguage(e.target.value)}
             type="nativeLanguage"
@@ -99,10 +99,10 @@ const RegisterPage = () => {
             placeholder="Native Language"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
-        {/* <label>
-          Target Language: */}
+        <label>
+          Target Language:
           <input
             onChange={(e) => setTargetLanguage(e.target.value)}
             type="targetLanguage"
@@ -110,7 +110,7 @@ const RegisterPage = () => {
             placeholder="Language Learning"
             className="field"
           />
-        {/* </label> */}
+        </label>
 
       </form>
       <button onClick={registerUser}>Register</button>
