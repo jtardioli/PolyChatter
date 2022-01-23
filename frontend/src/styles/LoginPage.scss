@@ -100,7 +100,6 @@
   letter-spacing: 1px;
   font-weight: 600;
   box-shadow: rgba(72, 72, 72, 0.2) 0px 3px 24px;
-  animation: sweg 6s ease-in-out infinite;
 }
 
 .for-pass {
@@ -119,22 +118,4 @@
   font-weight: 600;
   color: rgb(82, 82, 82);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 24px;
-}
-
-@keyframes sweg {
-  0% {
-    background-color: blue;
-  }
-  25% {
-    background-color: red;
-  }
-  50% {
-    background-color: pink;
-  }
-  75% {
-    background-color: yellow;
-  }
-  100% {
-    background-color: blue;
-  }
 }

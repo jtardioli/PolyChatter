@@ -28,7 +28,9 @@ const Message = (props) => {
 
   return (
     <div onClick={translateText}>
-      <p>{props.message}</p>
+      <p>
+        {props.message} - {props.name}
+      </p>
       {translatedText && <p>{translatedText}</p>}
     </div>
   );

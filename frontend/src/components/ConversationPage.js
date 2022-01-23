@@ -6,9 +6,9 @@ import { io } from "socket.io-client";
 import Message from "./Message";
 const socket = io("http://localhost:5000");
 
-export const ConversationPage = () => {
+export const ConversationPage = (props) => {
   const { id } = useParams();
-
+  console.log("This is the current user", props.currentUser);
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
 
@@ -31,43 +31,23 @@ export const ConversationPage = () => {
 
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
-      <Message key={index} name={name} message={message} />
+      <Message key={index} name={props.currentUser} message={message} />
     ));
   };
 
   return (
-    <>
-      {/* <div>This is the conversation with id: {id}</div>
-    <button onClick = {() => { socket.emit('chat message')}}>click me</button> */}
-
-      <div className="card">
-        <form onSubmit={onMessageSubmit}>
-          <h1>Messenger</h1>
-          <div className="name-field">
-            <TextField
-              name="name"
-              onChange={(e) => onTextChange(e)}
-              value={state.name}
-              label="Name"
-            />
-          </div>
-          <div className="name-field">
-            <TextField
-              name="message"
-              onChange={(e) => onTextChange(e)}
-              value={state.message}
-              id="outlined-multiline-static"
-              variant="outlined"
-              label="Message"
-            />
-          </div>
-          <button> Send Message</button>
-        </form>
-        <div className="render-chat">
-          <h1>Chat Log</h1>
-          {renderChat()}
+    <div>
+      <div className="render-chat">{renderChat()}</div>
+      <form onSubmit={onMessageSubmit}>
+        <div className="name-field">
+          <input
+            name="message"
+            onChange={(e) => onTextChange(e)}
+            value={state.message}
+          />
         </div>
-      </div>
-    </>
+        <button> Send Message</button>
+      </form>
+    </div>
   );
 };
