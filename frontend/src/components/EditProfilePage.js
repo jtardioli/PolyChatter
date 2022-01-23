@@ -89,15 +89,16 @@ const EditProfilePage = (props) => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Navbar currentUser={props.currentUser} />
-      <div> 
+      <div className="background-img">
         
       </div>
     
       <form className="vertical">
-      <img className="half" src={user.image}  width="120" height="120" />
       
+      <img className="img" src={user.image}  width="160px" height="160px" />
+
       <label className="label">
           Image
           <input 
