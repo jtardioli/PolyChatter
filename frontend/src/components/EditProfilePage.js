@@ -3,28 +3,26 @@ import Header from "./layout/Header";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 import "../styles/EditProfilePage.scss";
 
-
 const EditProfilePage = (props) => {
-
   const [user, setUser] = useState({
-    id:"",
-    name:"",
-    username:"",
-    bio:"",
-    countryData:"",
-    nativeLanguage:"",
-    targetLanguage:""
+    id: "",
+    name: "",
+    username: "",
+    bio: "",
+    countryData: "",
+    nativeLanguage: "",
+    targetLanguage: "",
   });
-  console.log(user)
+  console.log(user);
 
   const [image, setImage] = useState("");
 
   let navigate = useNavigate();
-  
+
   const token = localStorage.getItem("token");
   if (!token) {
     window.history.pushState({}, undefined, "/login");
@@ -35,82 +33,87 @@ const EditProfilePage = (props) => {
       Authorization: "Bearer " + token,
     },
   };
-  
-  useEffect(() => {
-  axios
-  .get(`http://localhost:5000/api/profile/edit`, config)
-  .then(function (response) {
-    // handle success
-    console.log(response)
-    setUser(response.data.userData[0])
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  });
-}, []);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/profile/edit`, config)
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        setUser(response.data.userData[0]);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
 
   const submit = () => {
-    const data = new FormData() 
-    console.log(data)
-    console.log(config)
-    data.append('file', image);
-    data.append('name', user.name);
-    data.append('username', user.username);
-    data.append('bio', user.bio);
-    data.append('country', user.countryData);
-    data.append('nativeLanguage', user.nativeLanguage);
-    data.append('targetLanguage', user.targetLanguage);
-    
+    const data = new FormData();
+    console.log(data);
+    console.log(config);
+    data.append("file", image);
+    data.append("name", user.name);
+    data.append("username", user.username);
+    data.append("bio", user.bio);
+    data.append("country", user.countryData);
+    data.append("nativeLanguage", user.nativeLanguage);
+    data.append("targetLanguage", user.targetLanguage);
+
     let url = "http://localhost:5000/api/profile/edit";
 
     // receive two parameter endpoint url ,form data
-    axios.post(url, data, config).then(res => { // then print response status
-        console.warn(res);
-    })
+    axios.post(url, data, config).then((res) => {
+      // then print response status
+      console.warn(res);
+    });
 
     const redirect = () => {
       navigate(`/profile/${user.id}`);
-    }
+    };
     redirect();
-  }
+  };
 
   const handleInputChange = (event) => {
-    setImage(event.target.files[0])
-  }
+    setImage(event.target.files[0]);
+  };
 
   const handleInput = (event) => {
-    const key = event.target.name
-    const val = event.target.value
-    setUser({...user, [key]: val})
-  }
-
+    const key = event.target.name;
+    const val = event.target.value;
+    setUser({ ...user, [key]: val });
+  };
 
   return (
     <div>
       <Header />
       <Navbar currentUser={props.currentUser} />
-      <div> 
-        
-      </div>
-    
-      <form className="vertical">
-      <img className="half" src={user.image}  width="120" height="120" />
-      
-      <label className="label">
-          Image
-          <input 
-            onChange={handleInputChange}
-            // onChange={handleInput}
-            type="file"
-            name="image"
-            className="input"
 
+      <form className="vertical">
+        <div class="img-wrap">
+          <img
+            className="half"
+            src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            width="120"
+            height="120"
           />
-        </label>
-      
-      <label className="label">
+          <label className=" label">
+            <input
+              onChange={handleInputChange}
+              // onChange={handleInput}
+              type="file"
+              name="image"
+              className="input"
+            />
+            <div className="change-img">
+              <span id="camera" class="material-icons material-icons-outlined">
+                photo_camera
+              </span>
+            </div>
+          </label>
+        </div>
+
+        <label className="label">
           Name
           <input
             onChange={handleInput}
@@ -183,8 +186,9 @@ const EditProfilePage = (props) => {
           />
         </label>
 
-        
-      <button className="btn" onClick={submit}>Save</button>
+        <button className="btn" onClick={submit}>
+          Save
+        </button>
       </form>
     </div>
   );

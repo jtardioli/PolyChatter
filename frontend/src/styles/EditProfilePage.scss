@@ -26,8 +26,9 @@
   position: absolute;
   //margin-bottom: 2rem;
   top: -4rem;
-	// bottom:30rem;
+  // bottom:30rem;
   border-radius: 50%;
+  object-fit: cover;
 }
 .btn {
   width: 5rem;
@@ -37,9 +38,42 @@
 }
 #bio {
   min-height: 3rem;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
-.label,.input{
-  display:flex;
-  flex-direction:column;
+.label,
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="file"] {
+  color: rgba(0, 0, 0, 0);
+}
+
+::file-selector-button {
+  display: none;
+}
+
+.change-img {
+  background-color: rgb(119, 119, 230);
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  bottom: 70px;
+  left: 60%;
+}
+
+#camera {
+  font-size: 0.8em;
+  color: white;
+}
+
+.img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
