@@ -44,6 +44,7 @@
 }
 .info-inner {
   height: 70%;
+  width: 98%;
 }
 
 .info-inner .name {
@@ -80,8 +81,13 @@
 }
 
 .info-inner p {
+  display: block;
   margin-top: 12px;
   color: rgb(116, 116, 116);
+  overflow: hidden;
+  white-space: normal;
   text-overflow: ellipsis;
+  max-width: 330px;
+  height: 39px;
   width: 95%;
 }

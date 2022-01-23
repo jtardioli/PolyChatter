@@ -1,0 +1,140 @@
+.login-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-wrap {
+  background-image: url("https://images.unsplash.com/photo-1529921879218-f99546d03a9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80");
+  background-size: cover;
+  width: 100%;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.login-logo {
+  width: 480px;
+  height: 480px;
+  z-index: 1;
+}
+
+.login-form-wrap {
+  border-radius: 30px;
+  height: 70vh;
+  background-color: white;
+  position: absolute;
+  top: 35vh;
+  width: 100%;
+  padding: 40px;
+}
+
+.login-form-wrap h1 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.login-form-wrap p {
+  color: rgb(118, 118, 118);
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.email-wrap {
+  display: flex;
+  width: 100%;
+  border-bottom: solid 1px rgb(216, 216, 216);
+  align-items: center;
+}
+
+.email-wrap div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 15px;
+}
+
+.email-wrap label {
+  padding-left: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1em;
+  color: rgb(63, 63, 63);
+  letter-spacing: 1px;
+}
+
+.email-wrap input {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+}
+
+#mail {
+  font-size: 1.7em;
+}
+
+.login-btn {
+  border: none;
+  width: 100%;
+  height: 60px;
+  margin-top: 3vh;
+  border-radius: 15px;
+  background-color: rgb(201, 117, 60);
+  color: white;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  font-weight: 600;
+  box-shadow: rgba(72, 72, 72, 0.2) 0px 3px 24px;
+  animation: sweg 6s ease-in-out infinite;
+}
+
+.for-pass {
+  margin-top: 20px;
+}
+
+.signup-btn {
+  margin-top: 20px;
+  border: solid 2px rgba(211, 211, 211, 0.557);
+  width: 100%;
+  height: 60px;
+  border-radius: 15px;
+  background-color: white;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: rgb(82, 82, 82);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 24px;
+}
+
+@keyframes sweg {
+  0% {
+    background-color: blue;
+  }
+  25% {
+    background-color: red;
+  }
+  50% {
+    background-color: pink;
+  }
+  75% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: blue;
+  }
+}

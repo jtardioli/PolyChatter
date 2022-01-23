@@ -4,7 +4,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon ./bin/www",
     "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {

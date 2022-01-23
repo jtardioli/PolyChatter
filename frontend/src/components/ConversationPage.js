@@ -31,11 +31,7 @@ export const ConversationPage = () => {
 
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
-      <Message
-        name={name}
-        message={message}   
-        key={index}
-      />
+      <Message key={index} name={name} message={message} />
     ));
   };
 
@@ -63,15 +59,13 @@ export const ConversationPage = () => {
               id="outlined-multiline-static"
               variant="outlined"
               label="Message"
-            />{" "}
-            <button>translate</button>
+            />
           </div>
           <button> Send Message</button>
         </form>
         <div className="render-chat">
           <h1>Chat Log</h1>
           {renderChat()}
-          <button>translate</button>
         </div>
       </div>
     </>
