@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/ProfilePage.scss";
 import SkillBar from "./profileblocks/SkillBar";
+
 const axios = require("axios").default;
 
 const ProfilePage = (props) => {
@@ -42,13 +43,31 @@ const ProfilePage = (props) => {
     <div className="my-profile-ctn">
       <div className="img-ctn">
         <div className="background">
-          <img
-            className="pfp"
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            alt=""
-          />
+          <div>
+            <img
+              className="pfp"
+              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+              alt=""
+            />
+            {isMyProfile && (
+              <div
+                onClick={() => {
+                  navigate(`/profile/edit`);
+                }}
+                className="setting-wrap"
+              >
+                <span
+                  id="settings"
+                  class="material-icons material-icons-outlined"
+                >
+                  settings
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
       <h1>{name}</h1>
       <h2>@{username}</h2>
       <div className="profile-divider"></div>
@@ -67,7 +86,6 @@ const ProfilePage = (props) => {
             <SkillBar level={targetLanguage?.level} />
           </div>
         </div>
-        <div className="vertical-div"></div>
         <div>
           <span id="map" className="material-icons material-icons-outlined">
             location_on

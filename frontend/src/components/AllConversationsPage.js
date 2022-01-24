@@ -43,7 +43,7 @@ const AllConversationsPage = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header text="Chats" />
 
       {allConversations}
       <Navbar currentUser={props.currentUser} />

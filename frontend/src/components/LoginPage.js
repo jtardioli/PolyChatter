@@ -41,7 +41,7 @@ const LoginPage = () => {
     <div className="login-ctn">
       <div className="login-wrap"></div>
       <div className="login-form-wrap">
-        <h1>Welcome Polyglot!</h1>
+        <h1>Welcome to PolyChatter!</h1>
         <p>Sign in to continue</p>
         <form className="login-form">
           <div className="email-wrap">

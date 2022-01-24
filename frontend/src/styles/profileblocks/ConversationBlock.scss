@@ -1,4 +1,32 @@
 .convo-block {
-  border: solid black 1px;
-  height: 10vh;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.convo-block img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.convo-block div {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  border-bottom: 1px solid rgb(233, 233, 233);
+  padding-left: 20px;
+}
+
+.all-convo-info h1 {
+  font-size: 1.3em;
+}
+.all-convo-info p {
+  font-size: 1em;
+  color: rgb(133, 133, 133);
 }

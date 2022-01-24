@@ -85,3 +85,20 @@
   color: rgb(105, 105, 105);
   line-height: 1.5em;
 }
+.setting-wrap {
+  background-color: rgb(111, 116, 245);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  left: 70%;
+  top: -16%;
+  cursor: pointer;
+}
+
+#settings {
+  color: rgb(255, 255, 255);
+}
