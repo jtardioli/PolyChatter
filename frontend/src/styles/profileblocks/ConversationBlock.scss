@@ -1,8 +1,13 @@
+.convo-block-wrap {
+  display: flex;
+  align-items: center;
+}
 .convo-block {
   height: 130px;
   display: flex;
   align-items: center;
   padding-left: 12px;
+  flex-grow: 1;
 }
 
 .convo-block img {
@@ -13,7 +18,6 @@
 }
 
 .convo-block div {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,10 +27,37 @@
   padding-left: 20px;
 }
 
+.all-convo-info {
+}
+
 .all-convo-info h1 {
   font-size: 1.3em;
 }
 .all-convo-info p {
   font-size: 1em;
   color: rgb(133, 133, 133);
+}
+
+.delete {
+}
+
+#options {
+  margin-right: 10px;
+  font-size: 2em;
+  color: rgb(179, 179, 179);
+  cursor: pointer;
+}
+
+#delete {
+  margin-right: 10px;
+  font-size: 2em;
+  color: rgb(228, 114, 114);
+  cursor: pointer;
+}
+
+#close {
+  margin-right: 10px;
+  font-size: 2em;
+  color: rgb(119, 218, 147);
+  cursor: pointer;
 }

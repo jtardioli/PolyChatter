@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/ProfilePage.scss";
 import SkillBar from "./profileblocks/SkillBar";
+import Cookies from "js-cookie";
 
 const axios = require("axios").default;
 
@@ -35,8 +36,46 @@ const ProfilePage = (props) => {
       });
   }, []);
 
-  const messageUser = () => {
-    navigate(`/conversation/${id}`);
+  const startConversation = () => {
+    if (Number(id) && props.currentUser) {
+      const token = Cookies.get("token"); // => 'value'
+
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      if (token) {
+        axios
+          .get(
+            `http://localhost:5000/api/conversation-from-users/${id}`,
+            config
+          )
+          .then(function (response) {
+            if (response.data[0]) {
+              const data = response.data[0];
+              navigate(`/conversation/${data.id}`);
+            } else {
+              axios
+                .post(
+                  `http://localhost:5000/api/create-convo/${props.currentUser}/${id}`
+                )
+                .then(function (response) {
+                  if (response.data[0]) {
+                    console.log(response.data[0]);
+                    const data = response.data[0];
+                    console.log(data.id);
+                    navigate(`/conversation/${data.id}`);
+                  }
+                });
+            }
+          })
+          .catch(function (error) {
+            // handle error
+            console.log("ERROROROR ---", error);
+          });
+      }
+    }
   };
 
   return (
@@ -49,7 +88,7 @@ const ProfilePage = (props) => {
               src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
               alt=""
             />
-            {isMyProfile && (
+            {isMyProfile ? (
               <div
                 onClick={() => {
                   navigate(`/profile/edit`);
@@ -58,9 +97,18 @@ const ProfilePage = (props) => {
               >
                 <span
                   id="settings"
-                  class="material-icons material-icons-outlined"
+                  className="material-icons material-icons-outlined"
                 >
                   settings
+                </span>
+              </div>
+            ) : (
+              <div onClick={startConversation} className="setting-wrap">
+                <span
+                  id="settings"
+                  className="material-icons material-icons-outlined"
+                >
+                  email
                 </span>
               </div>
             )}

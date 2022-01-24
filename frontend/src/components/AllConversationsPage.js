@@ -8,6 +8,18 @@ const axios = require("axios").default;
 const AllConversationsPage = (props) => {
   const [conversations, setConversations] = useState([]);
   const token = Cookies.get("token"); // => 'value'
+
+  const deleteChat = (convoID) => {
+    axios
+      .post(`http://localhost:5000/api/delete/${convoID}`)
+      .then(function (response) {
+        setConversations(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log("ERROROROR ---", error);
+      });
+  };
   if (!token) {
     // window.history.pushState({}, undefined, "/login");
   }
@@ -36,7 +48,11 @@ const AllConversationsPage = (props) => {
   if (conversations) {
     allConversations = conversations.map((conversation) => {
       return (
-        <ConversationBlock key={conversation.id} conversation={conversation} />
+        <ConversationBlock
+          deleteChat={deleteChat}
+          key={conversation.id}
+          conversation={conversation}
+        />
       );
     });
   }
