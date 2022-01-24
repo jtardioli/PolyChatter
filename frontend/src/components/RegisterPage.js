@@ -33,87 +33,128 @@ const RegisterPage = () => {
       }
       redirect();
   };
+  const signIn = () => {
+    const redirect = () => {
+      navigate(`/login`);
+    }
+    redirect();
+  }
 
   return (
-    <div>
-      <h1>Create new account.</h1>
-      <form className="inpt">
-          <input
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            name="name"
-            placeholder="Name"
-            className="field"
-          />
+    <div className="login-ctn">
+      <div className="login-wrap"></div>
+      <div className="login-form-wrap">
+        <h1>Let's Sign You Up!</h1>
+        {/* <h4>Create Account.</h4> */}
+        <form className="login-form">
+          <div className="email-wrap">
+            {/* <span className="material-icons material-icons-outlined">
+              User
+            </span> */}
+            <span className="material-icons">
+face
+</span>
+            <div>
+              <label>Name</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="John Doe"
+              />
+            </div>
+          </div>
+          <div className="email-wrap">
+          <span className="material-icons material-icons-outlined">
+              person
+            </span>
+            <div>
+              <label>Username</label>
+              <input
+                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="johndoe"
+              />
+            </div>
+          </div>
+          <div className="email-wrap">
+            <span id="mail" className="material-icons material-icons-outlined">
+              mail
+            </span>
+            <div>
+              <label>Email</label>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="johndoe@gmail.com"
+              />
+            </div>
+          </div>
+          
+          <div className="email-wrap">
+            <span className="material-icons material-icons-outlined">lock</span>
+            <div>
+              <label>Password</label>
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                name="password"
+                placeholder="*******"
+              />
+            </div>
+          </div>
+          <div className="email-wrap">
+          <span className="material-icons material-icons-outlined">
+            location_on
+          </span>
+            <div>
+              <label>Country</label>
+              <input
+                onChange={(e) => setCountryName(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="Your Country"
+              />
+            </div>
+          </div>
+          <div className="email-wrap">
+          <span className="material-icons material-icons">
+            language
+          </span>
+            <div>
+              <label>Native Language</label>
+              <input
+                onChange={(e) => setNativeLanguage(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="Your Native Language"
+              />
+            </div>
+          </div>
+          <div className="email-wrap">
+          <span className="material-icons">
+            translate
+          </span>
+            <div>
+              <label>Target Language</label>
+              <input
+                onChange={(e) => setTargetLanguage(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="Language You Are Learning"
+              />
+            </div>
+          </div>
 
-        <label>
-          Username:
-          <input
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            name="username"
-            placeholder="Username"
-            className="field"
-          />
-        </label>
-
-        <label>
-          Email:
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="field"
-          />
-        </label>
-
-        <label>
-          Password:
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="field"
-          />
-        </label>
-
-        <label>
-          Country:
-          <input
-            onChange={(e) => setCountryName(e.target.value)}
-            type="countryName"
-            name="countryName"
-            placeholder="Country"
-            className="field"
-          />
-        </label>
-
-        <label>
-          Native Language:
-          <input
-            onChange={(e) => setNativeLanguage(e.target.value)}
-            type="nativeLanguage"
-            name="nativeLanguage"
-            placeholder="Native Language"
-            className="field"
-          />
-        </label>
-
-        <label>
-          Target Language:
-          <input
-            onChange={(e) => setTargetLanguage(e.target.value)}
-            type="targetLanguage"
-            name="targetLanguage"
-            placeholder="Language Learning"
-            className="field"
-          />
-        </label>
-
-      </form>
-      <button onClick={registerUser}>Register</button>
+          <button className="login-btn" onClick={registerUser}>Sign Up</button>
+          <p className="for-pass">Already Have an Account?</p>
+        </form>
+        <button className="signup-btn" onClick={signIn}>
+           Sign In
+        </button>
+      </div>
     </div>
   );
 };
