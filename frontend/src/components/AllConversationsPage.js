@@ -7,18 +7,14 @@ const axios = require("axios").default;
 
 const AllConversationsPage = (props) => {
   const [conversations, setConversations] = useState([]);
+  const [refetch, setRefetch] = useState(false);
   const token = Cookies.get("token"); // => 'value'
 
-  const deleteChat = (convoID) => {
-    axios
-      .post(`http://localhost:5000/api/delete/${convoID}`)
-      .then(function (response) {
-        setConversations(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log("ERROROROR ---", error);
-      });
+  const deleteChat = async (convoID, setRefetch) => {
+    console.log("inside delete");
+    await axios.post(`http://localhost:5000/api/delete/${convoID}`);
+
+    setRefetch(true);
   };
   if (!token) {
     // window.history.pushState({}, undefined, "/login");
@@ -36,13 +32,15 @@ const AllConversationsPage = (props) => {
         .get("http://localhost:5000/api/all-conversations/", config)
         .then(function (response) {
           setConversations(response.data);
+
+          setRefetch(false);
         })
         .catch(function (error) {
           // handle error
           console.log("ERROROROR ---", error);
         });
     }
-  }, []);
+  }, [refetch]);
   console.log(conversations);
   let allConversations;
   if (conversations) {
@@ -52,6 +50,7 @@ const AllConversationsPage = (props) => {
           deleteChat={deleteChat}
           key={conversation.id}
           conversation={conversation}
+          setRefetch={setRefetch}
         />
       );
     });

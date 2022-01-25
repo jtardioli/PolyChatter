@@ -120,6 +120,7 @@ router.post("/delete/:id", async (req, res) => {
       ;`,
       [convoId]
     );
+    res.send("success");
   } catch (error) {
     console.log(error.message);
   }

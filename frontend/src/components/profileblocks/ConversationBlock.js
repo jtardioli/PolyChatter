@@ -27,7 +27,7 @@ const ConversationBlock = (props) => {
         <div>
           <span
             onClick={() => {
-              props.deleteChat(convoid);
+              props.deleteChat(convoid, props.setRefetch);
             }}
             id="delete"
             className="material-icons material-icons-outlined"
