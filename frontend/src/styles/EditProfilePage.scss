@@ -6,7 +6,6 @@
   font-size: 1.5rem;
   max-width: 36rem;
   margin:  auto;
-  // margin-top: 160px;
   position: relative;
   padding-top: 5rem;
   border-radius: 3%;
@@ -17,7 +16,6 @@
   margin-left: 3rem;
   float: left;
   color: grey;
-  // font-size: smaller;
   font-size: 0.8rem;
   width: 100%;
   display: flex;
@@ -37,14 +35,10 @@
 }
 .img {
   position: absolute;
-  //margin-bottom: 2rem;
   top: -6rem;
-	// bottom:30rem;
-  // border-radius: 50%;
   object-fit: cover;
   border-radius: 100%;
   border: solid white 2px;
-  // margin-top: 100px;
 }
 .background-img {
   display: flex;
@@ -85,19 +79,19 @@ input[type="file"] {
 
 .change-img {
   background-color: rgb(119, 119, 230);
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   position: relative;
   bottom: 60px;
-  left: 85%;
+  left: 36%;
 }
 
 #camera {
-  font-size: 0.8em;
+  font-size: 1.3em;
   color: white;
 }
 
@@ -105,8 +99,4 @@ input[type="file"] {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#name {
-  
-
 }

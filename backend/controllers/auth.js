@@ -4,7 +4,7 @@ const { sign, verify } = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
-  //console.log(req.body);
+  
   const {
     username,
     name,
@@ -25,18 +25,14 @@ exports.register = async (req, res) => {
     RETURNING *;`,
       [username, name, email, hashedPassword, 'http://res.cloudinary.com/dtx8hllui/image/upload/v1642474884/4beebce89d681837ba2f4105ce43afac.png.png']
     );
-    //console.log(userInfo);
     userInformation.userInfo = userInfo.rows[0];
 
     //Get Country id based on it's name
-    let countryId = await pool.query(
-      `
+    let countryId = await pool.query(`
     SELECT id FROM countries
     WHERE countryName = $1;`,
       [countryName]
     );
-    // console.log("countryId.rows==========")
-    // console.log(countryId)
     let countryIdData = countryId.rows[0].id;
 
     // Update Country id in Users table
@@ -51,7 +47,7 @@ exports.register = async (req, res) => {
     let countryData = country.rows;
     userInformation.userInfo.country_id = countryData[0].country_id;
 
-    // Display Native Language
+    // Select Native Language Id
     let nativeUserLangInfo = await pool.query(
       `
     SELECT id
@@ -60,11 +56,7 @@ exports.register = async (req, res) => {
     ;`,
       [nativeLanguage]
     );
-    // console.log("nativeUserLangInfo=====================")
-    // console.log(nativeLanguage)
-    // console.log(nativeUserLangInfo)
     let nativeLanguageId = nativeUserLangInfo.rows[0].id; //.longform;
-    // userInformation.userData[0].nativeLanguage = nativeLanguage;
 
     let nativeUserLangData = await pool.query(
       `
@@ -80,16 +72,12 @@ exports.register = async (req, res) => {
     ;`,
       [userInformation.userInfo.id, nativeLanguageId, true]
     );
-    // console.log("userInfo")
-    // console.log(userInfo)
-    // console.log("nativeUserLangInfo")
     let nativeLanguageData = nativeUserLangData.rows[0]; //.longform;
-    // console.log(nativeUserLangData)
+ 
     userInformation.userInfo.nativeLanguageData = nativeLanguageData;
-    console.log(userInformation);
-    //res.json(userInformation);
+   
 
-    // Display Target Language
+    // Select Target Language Id
     let targetUserLangInfo = await pool.query(
       `
     SELECT id
@@ -98,14 +86,9 @@ exports.register = async (req, res) => {
     ;`,
       [targetLanguage]
     );
-    // console.log("targetUserLangInfo=====================")
-    // console.log(targetLanguage)
-    // console.log(targetUserLangInfo)
     let targetLanguageId = targetUserLangInfo.rows[0].id; //.longform;
-    // userInformation.userData[0].targetLanguage = targetLanguage;
 
-    let targetUserLangData = await pool.query(
-      `
+    let targetUserLangData = await pool.query(`
     INSERT INTO userLanguages (
       user_id,
       language_id,
@@ -118,14 +101,9 @@ exports.register = async (req, res) => {
     ;`,
       [userInformation.userInfo.id, targetLanguageId, false]
     );
-    // console.log("userInfo")
-    // console.log(userInfo)
-    // console.log("nativeUserLangInfo")
     let targetLanguageData = targetUserLangData.rows[0]; //.longform;
     userInformation.userInfo.targetLanguageData = targetLanguageData;
-    // console.log(userInformation)
-
-    // console.log("hello");
+  
     res.status(201).json({
       success: true,
       message: "Registration Successful",
