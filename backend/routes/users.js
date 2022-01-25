@@ -4,8 +4,7 @@ const pool = require("../db");
 
 /* GET all users info */
 router.get("/users", async (req, res) => {
-  // console.log("req.params.id")
-  //   console.log(req.params.id)
+
   try {
     // query for all userLanguage enteries
     let usersLangData = await pool.query(`
@@ -33,18 +32,8 @@ router.get("/users", async (req, res) => {
     FROM users
     LEFT JOIN countries on countries.id = users.country_id
     ;
-    `,);
-    
-    // LEFT JOIN countries on countries.id = users.country_id
-    // EXCEPT users.id,
-    // users.username,
-    // users.name,
-    // users.image,
-    // users.email,
-    // users.bio
-    // FROM users
-    // WHERE users.id = $1
-    // Extract data from the gross big request object
+    `);
+
     usersLangData = usersLangData.rows;
     usersData = usersData.rows;
 

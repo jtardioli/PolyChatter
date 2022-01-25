@@ -45,15 +45,11 @@ const RegisterPage = () => {
       <div className="login-wrap"></div>
       <div className="login-form-wrap">
         <h1>Let's Sign You Up!</h1>
-        {/* <h4>Create Account.</h4> */}
         <form className="login-form">
           <div className="email-wrap">
-            {/* <span className="material-icons material-icons-outlined">
-              User
-            </span> */}
             <span className="material-icons">
-face
-</span>
+              face
+            </span>
             <div>
               <label>Name</label>
               <input
