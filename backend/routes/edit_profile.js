@@ -9,8 +9,6 @@ const cloudinary = require('cloudinary')
 router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   
   console.log("Edit profile POST")
-  //  console.log(req.body)
-  // console.log(req.user.id);
 
  try {
   let imageURL = "";
@@ -33,7 +31,6 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $2 
     RETURNING image;`, [imageURL, req.user.id]);
     let imageData = image.rows;
-    console.log(imageData)
     userInformation.imageData = imageData;
   }
 
@@ -47,7 +44,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $4 
     RETURNING username, name, bio;`, [req.body.username, req.body.name, req.body.bio, req.user.id]);
     let userData = userInfo.rows;
-    // console.log(userData)
+    
     userInformation.userData = userData;
 
 
@@ -55,11 +52,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     let countryId = await pool.query(`
     SELECT countries.id FROM countries
     WHERE countries.countryName = $1;`, [req.body.country]);
-    // console.log("countryId==========")
-    // console.log(countryId)
     let countryIdData = countryId.rows[0].id;
-    // console.log("countryIdData", countryIdData)
-    // return
 
     // Update Country id in Users table
     let country = await pool.query(`
@@ -68,8 +61,7 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE users.id = $2
     RETURNING *;`, [countryIdData, req.user.id]);
     let countryData = country.rows;
-    // console.log("countryData")
-    // console.log(countryData)
+
     userInformation.userData[0].countryData = countryData;
 
     // Select Native Language id based on language name (longForm)
@@ -77,8 +69,6 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT id FROM Languages
     WHERE longForm = $1;`, [req.body.nativeLanguage]);
     let nativeLanguageIdData = nativeLanguageId.rows[0].id;
-    // console.log("nativeLanguageId=============")
-    // console.log(nativeLanguageId)
 
     //Insert Native Language details into userLanguages bridge table 
     let insertNativeLanguage = await pool.query(`
@@ -86,11 +76,8 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SET language_id = $1
     WHERE user_id =$2 AND nativeLanguage = $3
     RETURNING *;`, [nativeLanguageIdData, req.user.id, true ]);
-    // console.log("insertNativeLanguage")
-    // console.log(insertNativeLanguage)
     let nativeLanguageData = insertNativeLanguage.rows[0];
-    // console.log("nativeLanguageData")
-    // console.log(nativeLanguageData)
+
     userInformation.userData[0].nativeLanguageData = nativeLanguageData;
 
     // Select Target Language id based on language longForm
@@ -98,8 +85,6 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SELECT id FROM Languages
     WHERE longForm = $1;`, [req.body.targetLanguage]);
     let targetLanguageIdData = targetLanguageId.rows[0].id;
-    // console.log("targetLanguageIdData")
-    // console.log(targetLanguageIdData)
 
     //Insert target language details into userLanguages bridge table 
     let insertTargetLanguage = await pool.query(`
@@ -107,13 +92,9 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     SET language_id = $1
     WHERE user_id =$2 AND nativeLanguage = $3
     RETURNING *;`, [targetLanguageIdData, req.user.id, false ]);
-    // console.log("insertTargetLanguage")
-    // console.log(insertTargetLanguage)
     let targetLanguageData = insertTargetLanguage.rows[0];
-    // console.log("targetLanguageData")
-    // console.log(targetLanguageData)
+
     userInformation.userData[0].targetLanguageData = targetLanguageData;
-      // console.log(userInformation)
 
     res.json(userInformation);
 
@@ -125,7 +106,6 @@ router.post("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
 // GET request for Edit Profile Page
 router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   console.log("Edit profile GET")
-  // console.log("req.user",req.user)
 
  try {
   let userInformation = {};
@@ -142,8 +122,7 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     WHERE id = $1
     ;`, [ req.user.id]);
     let userData = userInfo.rows;
-    // console.log("userData", userData)
-    // return
+
     userInformation.userData = userData;
 
     //Display country name
@@ -153,10 +132,8 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     JOIN users ON users.country_id = countries.id
     WHERE users.id = $1
     ;`, [req.user.id]);
-    // console.log(countryInfo)
     let countryData = countryInfo.rows[0].countryname;
-    // console.log("countryData")
-    // console.log(countryData)
+
     userInformation.userData[0].countryData = countryData;
 
     // Display native language
@@ -166,10 +143,8 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     JOIN userLanguages on userLanguages.language_id = Languages.id
     WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
     ;`, [ req.user.id, true]);
-    // console.log("nativeUserLangInfo")
-    // console.log(nativeUserLangInfo)
     let nativeLanguage = nativeUserLangInfo.rows[0].longform;
-    // console.log(userLangData)
+
     userInformation.userData[0].nativeLanguage = nativeLanguage;
 
     // Display target language
@@ -179,13 +154,9 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
     JOIN userLanguages on userLanguages.language_id = Languages.id
     WHERE userLanguages.user_id = $1 AND nativeLanguage = $2
     ;`, [ req.user.id, false]);
-    // console.log("targetUserLangInfo")
-    // console.log(targetUserLangInfo)
     let targetLanguage = targetUserLangInfo.rows[0].longform;
-    // console.log(userLangData)
+
     userInformation.userData[0].targetLanguage = targetLanguage;
-
-
 
     res.json(userInformation);
 
@@ -194,5 +165,4 @@ router.get("/profile/edit", validateJWTTokenMiddleware, async (req, res) => {
   }
 });
 
-// 'http://res.cloudinary.com/dtx8hllui/image/upload/v1642478965/logo_user.jpeg.jpg' default image for every user
 module.exports = router;

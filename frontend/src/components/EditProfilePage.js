@@ -1,5 +1,4 @@
 import Navbar from "./layout/Navbar";
-import Header from "./layout/Header";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -97,7 +96,6 @@ const EditProfilePage = (props) => {
           <label className="label">
             <input
               onChange={handleInputChange}
-              // onChange={handleInput}
               type="file"
               name="image"
               className="input"
@@ -125,7 +123,6 @@ const EditProfilePage = (props) => {
         <label className="label">
           Username
           <input
-            //onChange={(e) => setUsername(e.target.value)}
             onChange={handleInput}
             type="text"
             name="username"
@@ -137,7 +134,6 @@ const EditProfilePage = (props) => {
         <label className="label">
           Native Language
           <input
-            // onChange={(e) => setNativeLanguage(e.target.value)}
             onChange={handleInput}
             type="text"
             name="nativeLanguage"
@@ -149,7 +145,6 @@ const EditProfilePage = (props) => {
         <label className="label">
           Target Language
           <input
-            // onChange={(e) => setTargetLanguage(e.target.value)}
             onChange={handleInput}
             type="text"
             name="targetLanguage"
@@ -161,7 +156,6 @@ const EditProfilePage = (props) => {
         <label className="label">
           Country
           <input
-            // onChange={(e) => setCountry(e.target.value)}
             onChange={handleInput}
             type="text"
             name="countryData"
@@ -173,7 +167,6 @@ const EditProfilePage = (props) => {
         <label className="label">
           Self-introduction
           <input
-            // onChange={(e) => setBio(e.target.value)}
             onChange={handleInput}
             type="text"
             name="bio"
