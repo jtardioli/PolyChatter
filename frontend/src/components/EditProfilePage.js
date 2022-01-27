@@ -75,6 +75,7 @@ const EditProfilePage = (props) => {
   };
 
   const handleInputChange = (event) => {
+    console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
 
@@ -88,22 +89,19 @@ const EditProfilePage = (props) => {
     <div>
       <Navbar currentUser={props.currentUser} />
 
-      <div className="background-img">
-        
-      </div>
-    
+      <div className="background-img"></div>
+
       <form className="vertical">
-      
-      <img className="img" src={user.image}  width="160px" height="160px" />
-      <div>
-      <label className="label">
+        <img className="img" src={user.image} width="160px" height="160px" />
+        <div>
+          <label className="label">
             <input
               onChange={handleInputChange}
               // onChange={handleInput}
               type="file"
               name="image"
               className="input"
-              style={{display:"none"}}
+              style={{ display: "none" }}
             />
             <div className="change-img">
               <span id="camera" class="material-icons material-icons-outlined">

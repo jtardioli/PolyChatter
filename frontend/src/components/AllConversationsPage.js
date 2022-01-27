@@ -12,7 +12,7 @@ const AllConversationsPage = (props) => {
 
   const deleteChat = async (convoID, setRefetch) => {
     console.log("inside delete");
-    await axios.post(`http://localhost:5000/api/delete/${convoID}`);
+    axios.post(`http://localhost:5000/api/delete/${convoID}`);
 
     setRefetch(true);
   };
