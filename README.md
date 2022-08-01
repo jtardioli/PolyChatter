@@ -11,8 +11,8 @@ A full stack web application created in 1 week with the PERN stack.
 </p>
 
 
-Users can log in authenticated with JWT cookies; find language partners; edit their own user profile (images with cloudinary); 
-chat in real time; lastly they can translate messages from any language into their target language just by clicking on the message.
+Users can log in authenticated with JWT cookies, find language partners, edit their own user profile (images with cloudinary),
+chat in real time, lastly they can translate messages from any language into their target language just by clicking on the message.
 
 ## Dependencies
 - PostgreSQL
